@@ -35,7 +35,7 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
 #            - /Users/admin/vol/mysql:/var/lib/mysql
-            - C:\Users\admin\vol\mysql:/var/lib/mysql
+            - db:/var/lib/mysql
         networks:
             - my-duplicati-net
 
@@ -53,3 +53,6 @@ networks:
     my-duplicati-net:
         external: true
         name: custom_network
+
+volumes:
+    db:
