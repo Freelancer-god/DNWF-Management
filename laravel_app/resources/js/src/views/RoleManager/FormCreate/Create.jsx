@@ -7,14 +7,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import TextArea from "antd/es/input/TextArea";
 import { clog } from "../../../utils";
-import { spinnerCreate } from "../../../store/RoleManager";
+import { spinnerCreate } from "../../../store/ActiveDriverManager";
 import {
-    khach_hang,
-    tai_xe,
-    ho_tro,
     system,
-    thong_bao,
-    cau_hinh,
 } from "../permissions";
 
 function Create(props) {
@@ -40,86 +35,6 @@ function Create(props) {
     const [_systemSelectedKeys, setSystemSelectedKeys] = useState(
         data._systemSelectedKeys
     );
-    // Tài xế
-    const [_driverExpandedKeys, setDriverExpandedKeys] = useState(
-        data._driverExpandedKeys
-    );
-    const [_driverAutoExpandParent, setDriverAutoExpandParent] = useState(
-        data._driverAutoExpandParent
-    );
-    const [_driverCheckedKeys, setDriverCheckedKeys] = useState(
-        data._driverCheckedKeys
-    );
-    const [_driverSelectedKeys, setDriverSelectedKeys] = useState(
-        data._driverSelectedKeys
-    );
-    // Khách hàng
-    const [_customerExpandedKeys, setCustomerExpandedKeys] = useState(
-        data._customerExpandedKeys
-    );
-    const [_customerAutoExpandParent, setCustomerAutoExpandParent] = useState(
-        data._customerAutoExpandParent
-    );
-    const [_customerCheckedKeys, setCustomerCheckedKeys] = useState(
-        data._customerCheckedKeys
-    );
-    const [_customerSelectedKeys, setCustomerSelectedKeys] = useState(
-        data._customerSelectedKeys
-    );
-    // Cấu hình
-    const [_configExpandedKeys, setConfigExpandedKeys] = useState(
-        data._configExpandedKeys
-    );
-    const [_configAutoExpandParent, setConfigAutoExpandParent] = useState(
-        data._configAutoExpandParent
-    );
-    const [_configCheckedKeys, setConfigCheckedKeys] = useState(
-        data._configCheckedKeys
-    );
-    const [_configSelectedKeys, setConfigSelectedKeys] = useState(
-        data._configSelectedKeys
-    );
-    // tài xế
-    const [_tripExpandedKeys, setTripExpandedKeys] = useState(
-        data._tripExpandedKeys
-    );
-    const [_tripAutoExpandParent, setTripAutoExpandParent] = useState(
-        data._tripAutoExpandParent
-    );
-    const [_tripCheckedKeys, setTripCheckedKeys] = useState(
-        data._tripCheckedKeys
-    );
-    const [_tripSelectedKeys, setTripSelectedKeys] = useState(
-        data._tripSelectedKeys
-    );
-    // Thông báo
-    const [_notificationExpandedKeys, setNotificationExpandedKeys] = useState(
-        data._notificationExpandedKeys
-    );
-    const [_notificationAutoExpandParent, setNotificationAutoExpandParent] =
-        useState(data._notificationAutoExpandParent);
-    const [_notificationCheckedKeys, setNotificationCheckedKeys] = useState(
-        data._notificationCheckedKeys
-    );
-    const [_notificationSelectedKeys, setNotificationSelectedKeys] = useState(
-        data._notificationSelectedKeys
-    );
-    // Hỗ trợ
-    const [_supportExpandedKeys, setSupportExpandedKeys] = useState(
-        data._supportExpandedKeys
-    );
-    const [_supportAutoExpandParent, setSupportAutoExpandParent] = useState(
-        data._supportAutoExpandParent
-    );
-    const [_supportCheckedKeys, setSupportCheckedKeys] = useState(
-        data._supportCheckedKeys
-    );
-    const [_supportSelectedKeys, setSupportSelectedKeys] = useState(
-        data._supportSelectedKeys
-    );
-
-    clog("data", data);
-
     clog(
         "systemExpandedKeys, _systemAutoExpandParent,_systemCheckedKeys, _systemSelectedKeys",
         _systemExpandedKeys,
@@ -139,36 +54,6 @@ function Create(props) {
                 _systemAutoExpandParent,
                 _systemCheckedKeys,
                 _systemSelectedKeys,
-
-                _driverExpandedKeys,
-                _driverAutoExpandParent,
-                _driverCheckedKeys,
-                _driverSelectedKeys,
-
-                _customerExpandedKeys,
-                _customerAutoExpandParent,
-                _customerCheckedKeys,
-                _customerSelectedKeys,
-
-                _configExpandedKeys,
-                _configAutoExpandParent,
-                _configCheckedKeys,
-                _configSelectedKeys,
-
-                _tripExpandedKeys,
-                _tripAutoExpandParent,
-                _tripCheckedKeys,
-                _tripSelectedKeys,
-
-                _notificationExpandedKeys,
-                _notificationAutoExpandParent,
-                _notificationCheckedKeys,
-                _notificationSelectedKeys,
-
-                _supportExpandedKeys,
-                _supportAutoExpandParent,
-                _supportCheckedKeys,
-                _supportSelectedKeys,
             } = data;
             setId(_id);
             setRoleName(_roleName);
@@ -179,35 +64,6 @@ function Create(props) {
             setSystemCheckedKeys(_systemCheckedKeys);
             setSystemSelectedKeys(_systemSelectedKeys);
 
-            setDriverExpandedKeys(_driverExpandedKeys);
-            setDriverAutoExpandParent(_driverAutoExpandParent);
-            setDriverCheckedKeys(_driverCheckedKeys);
-            setDriverSelectedKeys(_driverSelectedKeys);
-
-            setCustomerExpandedKeys(_customerExpandedKeys);
-            setCustomerAutoExpandParent(_customerAutoExpandParent);
-            setCustomerCheckedKeys(_customerCheckedKeys);
-            setCustomerSelectedKeys(_customerSelectedKeys);
-
-            setConfigExpandedKeys(_configExpandedKeys);
-            setConfigAutoExpandParent(_configAutoExpandParent);
-            setConfigCheckedKeys(_configCheckedKeys);
-            setConfigSelectedKeys(_configSelectedKeys);
-
-            setTripExpandedKeys(_tripExpandedKeys);
-            setTripAutoExpandParent(_tripAutoExpandParent);
-            setTripCheckedKeys(_tripCheckedKeys);
-            setTripSelectedKeys(_tripSelectedKeys);
-
-            setNotificationExpandedKeys(_notificationExpandedKeys);
-            setNotificationAutoExpandParent(_notificationAutoExpandParent);
-            setNotificationCheckedKeys(_notificationCheckedKeys);
-            setNotificationSelectedKeys(_notificationSelectedKeys);
-
-            setSupportExpandedKeys(_supportExpandedKeys);
-            setSupportAutoExpandParent(_supportAutoExpandParent);
-            setSupportCheckedKeys(_supportCheckedKeys);
-            setSupportSelectedKeys(_supportSelectedKeys);
         }
     }, [data]);
 
@@ -223,36 +79,6 @@ function Create(props) {
         _systemAutoExpandParent,
         _systemCheckedKeys,
         _systemSelectedKeys,
-
-        _driverExpandedKeys,
-        _driverAutoExpandParent,
-        _driverCheckedKeys,
-        _driverSelectedKeys,
-
-        _customerExpandedKeys,
-        _customerAutoExpandParent,
-        _customerCheckedKeys,
-        _customerSelectedKeys,
-
-        _configExpandedKeys,
-        _configAutoExpandParent,
-        _configCheckedKeys,
-        _configSelectedKeys,
-
-        _tripExpandedKeys,
-        _tripAutoExpandParent,
-        _tripCheckedKeys,
-        _tripSelectedKeys,
-
-        _notificationExpandedKeys,
-        _notificationAutoExpandParent,
-        _notificationCheckedKeys,
-        _notificationSelectedKeys,
-
-        _supportExpandedKeys,
-        _supportAutoExpandParent,
-        _supportCheckedKeys,
-        _supportSelectedKeys,
     };
 
     useEffect(() => {
@@ -264,18 +90,6 @@ function Create(props) {
         _roleDescription,
 
         _systemCheckedKeys,
-
-        _driverCheckedKeys,
-
-        _customerCheckedKeys,
-
-        _configCheckedKeys,
-
-        _tripCheckedKeys,
-
-        _notificationCheckedKeys,
-
-        _supportCheckedKeys,
     ]);
 
     const onSystemExpand = (systemExpandedKeys) => {
@@ -296,134 +110,8 @@ function Create(props) {
     };
 
     const onSystemSelect = (systemSelectedKeys, info) => {
+        // console.log("onSystemSelect", info);
         setSystemSelectedKeys(systemSelectedKeys);
-    };
-
-    const onCustomerExpand = (customerExpandedKeys) => {
-        clog("onCustomerExpand", customerExpandedKeys);
-        setCustomerExpandedKeys(customerExpandedKeys);
-        setCustomerAutoExpandParent(false);
-    };
-
-    const onCustomerCheck = (customerCheckedKeys) => {
-        const removeArray = [];
-        customerCheckedKeys.map((item) => {
-            if (!isNaN(parseInt(item))) {
-                removeArray.push(parseInt(item));
-            }
-        });
-        clog("onCustomerCheck", removeArray);
-        setCustomerCheckedKeys(removeArray);
-    };
-
-    const onCustomerSelect = (customerSelectedKeys, info) => {
-        setCustomerSelectedKeys(customerSelectedKeys);
-    };
-
-    const onDriverExpand = (driverExpandedKeys) => {
-        clog("onDriverExpand", driverExpandedKeys);
-        setDriverExpandedKeys(driverExpandedKeys);
-        setDriverAutoExpandParent(false);
-    };
-
-    const onDriverCheck = (driverCheckedKeys) => {
-        const removeArray = [];
-        driverCheckedKeys.map((item) => {
-            if (!isNaN(parseInt(item))) {
-                removeArray.push(parseInt(item));
-            }
-        });
-        clog("onDriverCheck", removeArray);
-        setDriverCheckedKeys(removeArray);
-    };
-
-    const onDriverSelect = (driverSelectedKeys, info) => {
-        setDriverSelectedKeys(driverSelectedKeys);
-    };
-
-    const onconfigExpand = (configExpandedKeys) => {
-        clog("onconfigExpand", configExpandedKeys);
-        setConfigExpandedKeys(configExpandedKeys);
-        setConfigAutoExpandParent(false);
-    };
-
-    const onconfigCheck = (configCheckedKeys) => {
-        const removeArray = [];
-        configCheckedKeys.map((item) => {
-            if (!isNaN(parseInt(item))) {
-                removeArray.push(parseInt(item));
-            }
-        });
-        clog("onconfigCheck", removeArray);
-        setConfigCheckedKeys(removeArray);
-    };
-
-    const onconfigSelect = (configSelectedKeys, info) => {
-        // console.log("onconfigSelect", info);
-        setConfigSelectedKeys(configSelectedKeys);
-    };
-
-    const onTripExpand = (tripExpandedKeys) => {
-        clog("onTripExpand", tripExpandedKeys);
-        setTripExpandedKeys(tripExpandedKeys);
-        setTripAutoExpandParent(false);
-    };
-
-    const onTripCheck = (tripCheckedKeys) => {
-        const removeArray = [];
-        tripCheckedKeys.map((item) => {
-            if (!isNaN(parseInt(item))) {
-                removeArray.push(parseInt(item));
-            }
-        });
-        clog("onTripCheck", removeArray);
-        setTripCheckedKeys(removeArray);
-    };
-
-    const onTripSelect = (tripSelectedKeys, info) => {
-        setTripSelectedKeys(tripSelectedKeys);
-    };
-
-    const onNotificationExpand = (notificationExpandedKeys) => {
-        clog("onNotificationExpand", notificationExpandedKeys);
-        setNotificationExpandedKeys(notificationExpandedKeys);
-        setNotificationAutoExpandParent(false);
-    };
-
-    const onNotificationCheck = (notificationCheckedKeys) => {
-        const removeArray = [];
-        notificationCheckedKeys.map((item) => {
-            if (!isNaN(parseInt(item))) {
-                removeArray.push(parseInt(item));
-            }
-        });
-        clog("onNotificationCheck", removeArray);
-        setNotificationCheckedKeys(removeArray);
-    };
-
-    const onNotificationSelect = (notificationSelectedKeys, info) => {
-        setNotificationSelectedKeys(notificationSelectedKeys);
-    };
-
-    const onSupportExpand = (supportExpandedKeys) => {
-        clog("onSupportExpand", supportExpandedKeys);
-        setSupportExpandedKeys(supportExpandedKeys);
-        setSupportAutoExpandParent(false);
-    };
-
-    const onSupportCheck = (supportCheckedKeys) => {
-        const removeArray = [];
-        supportCheckedKeys.map((item) => {
-            if (!isNaN(parseInt(item))) {
-                removeArray.push(parseInt(item));
-            }
-        });
-        clog("onSupportCheck", removeArray);
-        setSupportCheckedKeys(removeArray);
-    };
-
-    const onSupportSelect = (supportSelectedKeys, info) => {
-        setSupportSelectedKeys(supportSelectedKeys);
     };
 
     return (
@@ -473,7 +161,7 @@ function Create(props) {
                                     }}
                                     htmlFor="vai_tro"
                                 >
-                                    <strong>Mô tả</strong>
+                                    <strong>Giá trị</strong>
                                 </label>
                             </div>
                             <div className="md:w-5/6">
@@ -525,126 +213,8 @@ function Create(props) {
                                     {/* {this.renderTreeNodes(system)} */}
                                 </Tree>
                             </div>
-                            <div className="lg:w-1/4 md:w-1/4 sm:w-1/4 w-full">
-                                <label
-                                    className="text-primary"
-                                    style={{ fontSize: "16px" }}
-                                >
-                                    <strong>Khách hàng</strong>
-                                </label>
-                                <Tree
-                                    defaultExpandAll={false}
-                                    checkable
-                                    onExpand={onCustomerExpand}
-                                    expandedKeys={_customerExpandedKeys}
-                                    autoExpandParent={_customerAutoExpandParent}
-                                    onCheck={onCustomerCheck}
-                                    checkedKeys={_customerCheckedKeys}
-                                    onSelect={onCustomerSelect}
-                                    selectedKeys={_customerSelectedKeys}
-                                    treeData={khach_hang}
-                                >
-                                    {/* {this.renderTreeNodes(partners)} */}
-                                </Tree>
-                            </div>
 
-                            <div className="lg:w-1/4 md:w-1/4 sm:w-1/4 w-full">
-                                <label
-                                    className="text-primary"
-                                    style={{ fontSize: "16px" }}
-                                >
-                                    <strong>Tài xế</strong>
-                                </label>
-                                <Tree
-                                    defaultExpandAll={false}
-                                    checkable
-                                    onExpand={onDriverExpand}
-                                    expandedKeys={_driverExpandedKeys}
-                                    autoExpandParent={_driverAutoExpandParent}
-                                    onCheck={onDriverCheck}
-                                    checkedKeys={_driverCheckedKeys}
-                                    onSelect={onDriverSelect}
-                                    selectedKeys={_driverSelectedKeys}
-                                    treeData={tai_xe}
-                                >
-                                    {/* {this.renderTreeNodes(system)} */}
-                                </Tree>
-                            </div>
                         </div>
-
-                        <div className="flex flex-wrap">
-                            <div className="lg:w-1/4 md:w-1/4 sm:w-1/4 w-full">
-                                <label
-                                    className="text-primary"
-                                    style={{ fontSize: "16px" }}
-                                >
-                                    <strong>Cấu hình</strong>
-                                </label>
-                                <Tree
-                                    defaultExpandAll={false}
-                                    checkable
-                                    onExpand={onconfigExpand}
-                                    expandedKeys={_configExpandedKeys}
-                                    autoExpandParent={_configAutoExpandParent}
-                                    onCheck={onconfigCheck}
-                                    checkedKeys={_configCheckedKeys}
-                                    onSelect={onconfigSelect}
-                                    selectedKeys={_configSelectedKeys}
-                                    treeData={cau_hinh}
-                                >
-                                    {/* {this.renderTreeNodes(partners)} */}
-                                </Tree>
-                            </div>
-
-                            <div className="lg:w-1/4 md:w-1/4 col-sm-6 w-full">
-                                <label
-                                    className="text-primary"
-                                    style={{ fontSize: "16px" }}
-                                >
-                                    <strong>Thông báo</strong>
-                                </label>
-                                <Tree
-                                    defaultExpandAll={false}
-                                    checkable
-                                    onExpand={onNotificationExpand}
-                                    expandedKeys={_notificationExpandedKeys}
-                                    autoExpandParent={
-                                        _notificationAutoExpandParent
-                                    }
-                                    onCheck={onNotificationCheck}
-                                    checkedKeys={_notificationCheckedKeys}
-                                    onSelect={onNotificationSelect}
-                                    selectedKeys={_notificationSelectedKeys}
-                                    treeData={thong_bao}
-                                >
-                                    {/* {this.renderTreeNodes(partners)} */}
-                                </Tree>
-                            </div>
-                            <div className="lg:w-1/4 md:w-1/4 sm:w-1/4 w-full">
-                                <label
-                                    className="text-primary"
-                                    style={{ fontSize: "16px" }}
-                                >
-                                    <strong>Hỗ trợ</strong>
-                                </label>
-                                <Tree
-                                    defaultExpandAll={false}
-                                    checkable
-                                    onExpand={onSupportExpand}
-                                    expandedKeys={_supportExpandedKeys}
-                                    autoExpandParent={_supportAutoExpandParent}
-                                    onCheck={onSupportCheck}
-                                    checkedKeys={_supportCheckedKeys}
-                                    onSelect={onSupportSelect}
-                                    selectedKeys={_supportSelectedKeys}
-                                    treeData={ho_tro}
-                                >
-                                    {/* {this.renderTreeNodes(partners)} */}
-                                </Tree>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-wrap" />
                     </div>
                 </div>
             </Spin>
