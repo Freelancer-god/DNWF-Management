@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+    server:
+        container_name: server
+        build:
+            context: .
+            dockerfile: .docker/Dockerfile_dev
+        image: dev-image/app
+
+        ports:
+            - '8080:80'
+        environment:
+            CONTAINER_ROLE: app
+        env_file: laravel_app/.env
+        volumes:
+            - ./.docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+            - ./.docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+            - ./laravel_app:/var/www/laravel_app
+#            - '.:/var/www'
+            - /var/www/laravel_app/vendor
+        networks:
+            - my-duplicati-net
+
+    mysql-db:
+        image: 'mariadb:11.1'
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: secret_pass
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: dnwf_db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret_pass
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+#            - /Users/admin/vol/mysql:/var/lib/mysql
+            - C:\Users\admin\vol\mysql:/var/lib/mysql
+        networks:
+            - my-duplicati-net
+
+    phpmyadmin:
+        networks:
+            - my-duplicati-net
+        image: phpmyadmin/phpmyadmin:latest
+        environment:
+            PMA_HOST: mysql-db
+            PMA_PORT: 3306
+            UPLOAD_LIMIT: 200M
+        ports:
+            - "8081:80"
+networks:
+    my-duplicati-net:
+        external: true
+        name: custom_network

@@ -1,0 +1,21 @@
+laravel_app/.phpunit.cache
+laravel_app/node_modules
+# laravel_app/public/build
+laravel_app/public/hot
+laravel_app/public/storage
+!laravel_app/storage/*.key
+laravel_app/vendor
+.idea
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+#/.fleet
+#/.idea
+#/.vscode
+.DS_Store

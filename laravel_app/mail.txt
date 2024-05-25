@@ -1,0 +1,30 @@
+Tiêu đề: Response to Apple Review Queries for Cudidi Driver App
+Dear Apple Review Team,
+
+Thank you for contacting us regarding the Cudidi Driver app. We appreciate your interest and are happy to answer your questions:
+
+1. Is your app restricted to users who are part of a single company? This may include users of the company's partners, employees, and contractors.
+- No, the Cudidi Driver app is not restricted to users of a single company. While currently partnered with C&U Vietnam, the app is designed for independent drivers across various ride-hailing platforms. Any licensed driver meeting our eligibility criteria can apply to become a Cudidi Driver and access the app's features.
+
+2. Is your app designed for use by a limited or specific group of companies? 
+- The Cudidi Driver app is intended for broader use within the ride-hailing industry. As mentioned previously, any qualified driver can join, regardless of their affiliation with specific companies.
+
+3. What features in the app, if any, are intended for use by the general public?
+- The Cudidi Driver app is not directly accessible to the general public. Its features are specifically designed to assist drivers in managing their ride-hailing activities, such as:
+    + Order aggregation: Cudidi Driver aggregates ride requests from multiple platforms onto one interface, potentially optimizing drivers' earnings and reducing downtime.
+    + Route optimization: The app provides route suggestions and navigation tools to help drivers reach their destinations efficiently.
+    + Earnings management: Drivers can track their earnings, view trip details, and manage their finances within the app.
+    + Community features: Cudidi Driver facilitates communication and support among drivers through forums and messaging functionalities.
+
+4. How do users obtain an account?
+- Drivers can download the Cudidi Driver app from the App Store and register using their valid driver's licenses, vehicle information. We also conduct background checks to ensure the safety and reliability of our driver community.
+
+5. Is there any paid content in the app and if so who pays for it? For example, do users pay for opening an account or using certain features in the app?
+- Currently, the Cudidi Driver app is free to download and use for all functionalities. 
+
+We believe that Cudidi Driver addresses a clear need within the ride-hailing industry by empowering drivers with efficient tools and a supportive community. We are confident that the app will be a valuable asset for independent drivers across various platforms.
+
+Thank you for your time and consideration. We are happy to provide any further information you may require.
+Sincerely,
+Developer Team
+

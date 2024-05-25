@@ -1,0 +1,11 @@
+{
+    "cudidi_cms_server": "cudidi-cms-server",
+    "cudidi_location_service": "cudidi-location-service:3000",
+    "cudidi_customer_service": "cudidi-customer-service",
+    "cudidi_notification_service": "cudidi-notification-service",
+    "cudidi_address_service": "cudidi-address-service",
+    "cudidi_driver_service": "cudidi-driver-service",
+    "cudidi_support_service": "cudidi-support-service",
+    "cudidi_protected_media_service": "cudidi-protected-media-service",
+    "cudidi_trip_service": "cudidi-trip-service"
+}

@@ -1,0 +1,212 @@
+.nav_style {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.nav_caption {
+  color: white;
+	font-size: 14px;
+  padding-right: 10px;
+}
+
+.nav-menu {
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  // justify-content: center;
+  align-items: center;
+  // grid-gap:20px;
+  flex: 1;
+  
+}
+
+
+.nav-item {
+  height: 50px;
+}
+
+.nav-links {
+	color: white;
+	text-align: center;
+	padding: 12px 16px;
+	text-decoration: none;
+	font-size: 14px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+}
+
+.nav-links:hover,
+.nav-links.active
+{
+  background-color: var(--color-primary);
+  color: white;
+}
+
+
+// .nav_style li a:hover:not(.active) {
+// 	background-color: var(--color-primary);
+// }
+
+.nav_style .active {
+	//background-color: #04AA6D;
+}
+
+.nav_style strong {
+	font-size: 22px;
+}
+
+.ant_table_custom_padding .ant-table-wrapper .ant-table-cell {
+	padding: 5px 10px !important;
+	font-size: 13px;
+}
+
+.ant-breadcrumb_custom_fontsize .ant-breadcrumb .ant-breadcrumb-link {
+	font-size: 18px;
+}
+
+
+.menu-icon {
+  color: white;
+  display: none;
+}
+
+.submenu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-main-background);
+  filter: drop-shadow(0 1px 5px var(--color-box-shadow));
+
+  border-bottom-left-radius: var(--border-radius-large);
+  border-bottom-right-radius: var(--border-radius-large);;
+  position: absolute;
+
+  box-sizing: border-box;
+  z-index: 2000;
+  min-width: 150px;
+  max-width: 350px;
+  min-height: 66px;
+  max-height: calc(100vh - 50px - 8px);
+  justify-content: center;
+  margin: 0;
+  overflow-y: auto;
+  transition: all 0.2s ease;
+}
+.submenu.active{
+  display:flex;
+}
+.submenu-item {
+  width: 100%;
+}
+.submenu-link {
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: var(--color-main-text);
+  padding: 10px 12px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  position: relative;
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-left-color: transparent;
+  // justify-content: center;
+  width: 100%;
+}
+.submenu-link:hover{
+  background-color: var(--color-background-hover);
+  color: var(--color-main-text);
+  border-left-color: var(--color-primary);
+}
+
+@media screen and (max-width: 699px) {
+  .menu-icon {
+    display: block;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .nav-item {
+    width: 100%;
+  }
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+
+    width: 40%;
+    height: 0vh;
+    position: absolute;
+    top: 50px;
+    left: -100%;
+
+    opacity: 0;
+    justify-content: flex-start;
+    transition: all 0.2s ease;
+  }
+  .nav-menu.active {
+    // background-color: var(--color-main-background-blur);
+    // backdrop-filter: var(--filter-background-blur);
+
+    // background-color: red;
+    left: 0;
+    height: auto;
+    opacity: 1;
+    transition: all 0.2s ease;
+    z-index: 1;
+
+
+    background-color: var(--color-main-background);
+    filter: drop-shadow(0 1px 5px var(--color-box-shadow));
+    border-top-right-radius:var(--border-radius-large);
+    border-bottom-right-radius:var(--border-radius-large);
+
+    box-sizing: border-box;
+    z-index: 2000;
+    position: absolute;
+    max-width: 350px;
+    min-height: 66px;
+    max-height: calc(100vh - 50px - 8px);
+    right: 8px;
+    top: 50px;
+    margin: 0;
+    // overflow-y: auto;
+  }
+
+  .nav-links {
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    color: var(--color-main-text);
+    padding: 10px 12px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+  }
+  .nav-links:hover{
+    background-color: var(--color-background-hover);
+    color: var(--color-main-text);
+  }
+
+
+
+  .submenu {
+    filter: none;
+  }
+  .submenu.active {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 100%;
+
+  }
+}
+
+#appnavigation {
+  width: 100%;
+}

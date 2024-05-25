@@ -1,0 +1,11 @@
+{
+  "eslint.enable": true,
+  // "eslint.validate": ["javascript","javascriptreact"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "true",
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
+}

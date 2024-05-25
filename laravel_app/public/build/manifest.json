@@ -1,0 +1,55 @@
+{
+  "resources/js/src/assets/avatarFemaleDefault.jpeg": {
+    "file": "assets/avatarFemaleDefault-338ba262.jpeg",
+    "src": "resources/js/src/assets/avatarFemaleDefault.jpeg"
+  },
+  "resources/js/src/assets/avatarMaleDefault.jpeg": {
+    "file": "assets/avatarMaleDefault-09c75078.jpeg",
+    "src": "resources/js/src/assets/avatarMaleDefault.jpeg"
+  },
+  "resources/js/src/assets/avatat_default.png": {
+    "file": "assets/avatat_default-0fc1cd5f.png",
+    "src": "resources/js/src/assets/avatat_default.png"
+  },
+  "resources/js/src/assets/moto.png": {
+    "file": "assets/moto-cc7e2acc.png",
+    "src": "resources/js/src/assets/moto.png"
+  },
+  "resources/js/src/assets/oto.png": {
+    "file": "assets/oto-ee5a96c2.png",
+    "src": "resources/js/src/assets/oto.png"
+  },
+  "resources/js/src/assets/oto7.png": {
+    "file": "assets/oto7-2410165e.png",
+    "src": "resources/js/src/assets/oto7.png"
+  },
+  "resources/js/src/assets/placeholder.jpg": {
+    "file": "assets/placeholder-7d04691d.jpg",
+    "src": "resources/js/src/assets/placeholder.jpg"
+  },
+  "resources/js/src/assets/user-marker.png": {
+    "file": "assets/user-marker-becc6c4f.png",
+    "src": "resources/js/src/assets/user-marker.png"
+  },
+  "resources/js/src/main.css": {
+    "file": "assets/main-dd352ea0.css",
+    "src": "resources/js/src/main.css"
+  },
+  "resources/js/src/main.jsx": {
+    "assets": [
+      "assets/avatarMaleDefault-09c75078.jpeg",
+      "assets/avatarFemaleDefault-338ba262.jpeg",
+      "assets/placeholder-7d04691d.jpg",
+      "assets/moto-cc7e2acc.png",
+      "assets/oto-ee5a96c2.png",
+      "assets/oto7-2410165e.png",
+      "assets/user-marker-becc6c4f.png"
+    ],
+    "css": [
+      "assets/main-dd352ea0.css"
+    ],
+    "file": "assets/main-9a191947.js",
+    "isEntry": true,
+    "src": "resources/js/src/main.jsx"
+  }
+}

@@ -1,0 +1,80 @@
+FROM php:7.3.27-apache
+USER root
+# Use the default production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+#change document root or other Apache configuration
+ENV APACHE_DOCUMENT_ROOT /var/www/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+
+COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/start-apache /usr/local/bin
+COPY .docker/entrypoint.sh /usr/local/bin
+COPY . /var/www
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  autoconf \
+  build-essential \
+  apt-utils \
+  zlib1g-dev \
+  libzip-dev \
+  unzip \
+  zip \
+  #libmagick++-dev \
+  libmagickwand-dev \
+  libpq-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev \
+  libwebp-dev \
+  nfs-common \
+  libxpm-dev
+
+RUN docker-php-ext-configure gd \
+  --with-png-dir=/usr/include/ \
+  --with-jpeg-dir=/usr/include/ \
+  --with-freetype-dir=/usr/include/
+
+RUN docker-php-ext-configure zip --with-libzip
+
+RUN docker-php-ext-install gd intl pdo_mysql pdo_pgsql mysqli zip
+
+#RUN pecl install imagick-3.4.3
+
+#RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+#RUN docker-php-ext-enable imagick
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Clear package lists
+RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+# Permissions
+RUN chown -R www-data:www-data /var/www
+#RUN chown -R $USER:www-data \
+#        /var/www/storage \
+#        /var/www/bootstrap/cache
+#RUN chmod -R 777  /var/www/storage
+RUN chmod -R 775  /var/www/storage/logs
+RUN chmod -R 775  /var/www/bootstrap/cache
+
+
+#RUN chmod u+rwx,g+rx,o+rx /var/www
+#RUN find /var/www -type d -exec chmod u+rwx,g+rx,o+rx {} +
+#RUN find /var/www -type f -exec chmod u+rw,g+rw,o+r {} +
+RUN a2enmod rewrite
+RUN a2enmod ssl
+WORKDIR /var/www
+
+# create storage symlink
+RUN php artisan storage:link
+
+RUN ["chmod", "+x", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+EXPOSE 80
+EXPOSE 443
+
+#docker comment
+#https://www.codenotary.com/blog/extremely-useful-docker-commands/

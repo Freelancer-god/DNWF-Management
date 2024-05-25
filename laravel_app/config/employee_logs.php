@@ -1,0 +1,73 @@
+<?php
+
+return [
+    'action_type' => [
+        0 => 'Hệ thống',
+        1 => 'Nhân viên',
+        2 => 'Vai trò',
+        3 => 'Khách hàng',
+        4 => 'Hóa đơn chuyến đi',
+        5 => 'Đánh giá khách hàng',
+        6 => 'Quản lý tài xế',
+        7 => 'Nhập liệu thông tin tài xế',
+        8 => 'Nhập liệu phương tiện tài xế',
+        9 => 'Cuốc xe',
+        10 => 'Phiếu đặt cọc',
+        11 => 'Hỗ trợ',
+        12 => 'Cấu hình',
+        13 => 'Câu hỏi',
+        14 => 'Câu trả lời',
+        15 => 'Chat'
+    ],
+    'action' => [
+        0 => 'Đăng nhập',
+        1 => 'Thêm mới',
+        2 => 'Cập nhật thông tin',
+        3 => 'Xoá ',
+        4 => 'Xác nhận',
+        5 => 'Trả lời'
+    ],
+    'content' => [
+        0 => 'Đăng nhập vào hệ thống',
+        1 => '%s nhân viên: %s, tên: %s, số đt: %s',
+        2 => '%s vai trò tên %s',
+        3 => '%s khách hàng: %s, số đt %s ',
+        4 => '%s hóa đơn chuyến đi %s, ngày cập nhật %s',
+        5 => '%s đánh giá KH %s',
+        6 => '%s Tài xế: mã %s, số đt %s, %s',
+        7 => '%s nhập liệu thông tin TX %s',
+        8 => '%s nhập liệu thông tin PT %s ',
+        9 => '%s cuốc xe %s, %s',
+        10 => '%s phiếu đặt cọc %s, %s ',
+        11 => '%s hỗ trợ %s',
+        12 => '%s cấu hình %s',
+        13 => '%s câu hỏi %s, %s',
+        14 => '%s câu trả lời %s',
+        15 => '%s chat',
+    ],
+    'action_content' => [
+        1 => 'Thêm mới',
+        2 => 'Cập nhật thông tin',
+        3 => 'Xoá',
+        4 => 'Xác nhận',
+        5 => 'Trả lời'
+    ],
+    'log_type' => [
+        0 => 'employees',
+        1 => 'employees',
+        2 => 'roles',
+        3 => 'passengers',
+        4 => 'invoices',
+        5 => 'driver_ratings',
+        6 => 'drivers',
+        7 => 'driver_forms',
+        8 => 'vehicle_forms',
+        9 => 'trips',
+        10 => 'deposit_invoices',
+        11 => 'supports',
+        12 => 'configs',
+        13 => 'questions',
+        14 => 'answers',
+        15 => 'user_comments'
+    ],
+];

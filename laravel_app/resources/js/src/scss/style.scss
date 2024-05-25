@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+// @import '@nextcloud/password-confirmation/dist/style.css';
+@import "antd/dist/reset.css";
+@import "./navbar.scss";
+@import "custom_antd";
+@import "text_style";
+@import "quill/dist/quill.core.css";
+@import "quill/dist/quill.bubble.css";
+@import "quill/dist/quill.snow.css";
+@import "./chat_style.scss";
+@import "./variables.scss";
+
+span {
+    cursor: unset;
+}
+
+.bg-stripes-purple {
+    //background-color: #c084fc1a;
+    //background-image: linear-gradient(135deg, #a855f780 10%, transparent 0, transparent 50%, #a855f780 0, #a855f780 60%, transparent 0, transparent);
+    //background-size: 7.07px 7.07px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2P4DwTv3r0DYxBggDFgEpgC6FoAQUA+KU95tFkAAAAASUVORK5CYII=");
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.custom-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+    /* For Firefox */
+    -ms-overflow-style: none;
+    /* For Internet Explorer and Edge */
+}
+
+.custom-container::-webkit-scrollbar {
+    width: 0;
+    /* For Chrome, Safari, and Opera */
+    background: transparent;
+}
+
+.no-scroll-bar {
+    overflow: auto;
+    scrollbar-width: none;
+    /* For Firefox */
+    -ms-overflow-style: none;
+    /* For Internet Explorer and Edge */
+}
+
+.no-scroll-bar::-webkit-scrollbar {
+    width: 0;
+    height: 0px;
+    /* For Chrome, Safari, and Opera */
+    background: transparent;
+ 
+}
+
+.custom-form-sheet-md {
+    //min-width: 650px;
+    max-width: 1140px;
+    min-height: 330px;
+    border: 1px solid #c8c8d3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: white;
+    margin: 4.8px auto;
+    padding: 24px 16px;
+}
+
+.custom-form-sheet-sm {
+    //min-width: 450px;
+    max-width: 800px;
+    min-height: 330px;
+    border: 1px solid #c8c8d3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: white;
+    margin: 4.8px auto;
+    padding: 24px 16px;
+}
+
+.custom-render-dropdown {
+    padding: 4px;
+    list-style-type: none;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+        0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toastify button {
+    line-height: initial;
+}
+
+.toastify.dialogs {
+    justify-content: space-between;
+}
+
+.modal-container
+    .dialog__container
+    .input-field
+    .input-field__main-wrapper
+    .input-field__input {
+    border: 2px solid var(--color-primary-element);
+
+    &:not(:disabled):not(.primary) {
+        &:hover,
+        &:focus,
+        &.active {
+            /* active class used for multiselect */
+            border-color: var(--color-primary-element);
+            outline: none;
+        }
+
+        &:active {
+            outline: none;
+            background-color: var(--color-main-background);
+            color: var(--color-text-light);
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+    }
+}
+
+.modal-wrapper--small .modal-container {
+    width: unset !important;
+}
+
+.custom-empty-center {
+    height: 25vh;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auto-width-cell {
+    white-space: nowrap; // Ngăn các giá trị quá dài bị ngắt dòng
+    overflow: hidden; // Ẩn phần vượt quá độ rộng của ô
+    text-overflow: ellipsis; // Hiển thị dấu chấm elipsis (...) khi giá trị vượt quá độ rộng
+}
+
+@media screen and (max-width: 450px) {
+    .ant-select-multiple .ant-select-selection-search,
+    .ant-select-multiple .ant-select-selection-overflow-item {
+        flex: 1 !important;
+    }
+}
+
+.ant-tabs-tab-btn {
+    cursor: pointer !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active {
+    background-color: #e0e0e0 !important;
+}
+
+.ant-picker-cell-inner {
+    text-align: center;
+}
+
+.tab-icons .anticon {
+    margin-right: 5px !important;
+}
+.tab-icons {
+    display: inline-block;
+}

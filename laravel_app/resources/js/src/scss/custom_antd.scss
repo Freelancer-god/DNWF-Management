@@ -1,0 +1,131 @@
+.ant_table_custom_padding .ant-table-wrapper .ant-table-cell {
+	padding: 5px 10px !important;
+	font-size: 13px;
+	//cursor: pointer;
+}
+
+.ant-breadcrumb_custom_fontsize .ant-breadcrumb .ant-breadcrumb-link {
+	font-size: 18px;
+}
+
+
+.custom-button-ant-span span {
+	margin-left: 5px;
+}
+
+.ant-button-custom-pick-color .ant-btn {
+	height: 18px;
+	border: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+.ant-button-custom-pick-color .ant-btn-circle {
+	min-width: 18px;
+}
+
+.ant-table-footer-custom-padding .ant-table-wrapper .ant-table-footer {
+	padding: 0;
+}
+
+.ant-input-custom-border-color .ant-input {
+	border-color: transparent;
+}
+
+.ant-input-custom-padding .ant-input {
+	padding: 0 11px
+}
+
+.ant-input-custom-border-color .ant-input:focus {
+	border-color: var(--color-primary-element);
+}
+
+.custom-row-grid .row {
+	--bs-gutter-x: unset;
+}
+
+.ant-popover-custom-padding .ant-popover .ant-popover-inner {
+	padding: 5px;
+}
+
+.ant-select-custom-height .ant-select-selector {
+	height: 26px !important;
+}
+
+.ant-select-custom-height .ant-select-selector .ant-select-selection-item {
+	line-height: 26px;
+}
+
+.ant-select-search-custom-height .ant-select-selector {
+	height: 26px !important;
+}
+
+.ant-select-search-custom-height .ant-select-selector .ant-select-selection-placeholder {
+	line-height: 26px;
+}
+
+.ant-select-search-custom-height .ant-select-selector .ant-select-selection-search {
+	height: 24px;
+}
+
+.ant-select-search-custom-height .ant-select-selector .ant-select-selection-search .ant-select-selection-search-input {
+	height: 24px;
+}
+
+.ant-select-search-custom-height .ant-select-selector .ant-select-selection-item {
+	line-height: 26px;
+	font-size: 12px;
+}
+
+.ant-input-custom-height {
+	height: 26px !important;
+}
+
+.ant-button-custom-height {
+	height: 26px;
+	padding: 0 5px;
+	font-size: 13px;
+}
+
+.ant-button-custom-border-radius {
+	border-radius: 0
+}
+
+.custom-select-item-ant-full .ant-select-selector .ant-select-selection-overflow .ant-select-selection-overflow-item .ant-select-selection-item {
+	height: unset;
+	white-space: pre-wrap;
+}
+
+.custom-select-item-ant-full .ant-select-selector .ant-select-selection-overflow .ant-select-selection-overflow-item .ant-select-selection-item .ant-select-selection-item-content {
+	white-space: pre-wrap;
+	max-width: 96%;
+}
+
+.custom-select-item-ant-full .ant-select-selector .ant-select-selection-overflow .ant-select-selection-overflow-item .ant-select-selection-item .ant-select-selection-item-remove {
+	width: 16px;
+}
+
+.custom-ant-form-item-align-item-start .ant-form-item-row .ant-form-item-label > label {
+	align-items: start;
+}
+
+.table-row-light {
+	background-color: #ffffff;
+}
+.table-row-dark {
+	background-color: #fbfbfb;
+}
+
+.custom-ant-input-number-height .ant-input-number-input-wrap .ant-input-number-input{
+	height: 24px;
+}
+
+.custom-table .ant-table-thead>tr>th {
+	text-align: left !important;
+}
+
+.custom-table .ant-table-column-title {
+	cursor: pointer;
+}
+
+.custom-tag:hover {
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
