@@ -1,34 +1,9 @@
 <?php
 
-use App\Http\Controllers\API\ConfigApiController;
-use App\Http\Controllers\API\DriverApiController;
-use App\Http\Controllers\API\MediaApiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\OtpAttemptApiController;
 use App\Http\Controllers\API\EmployeeApiController;
 use App\Http\Controllers\API\RoleApiController;
-use App\Http\Controllers\API\DriverFormApiController;
-use App\Http\Controllers\API\VehicleFormApiController;
-use App\Http\Controllers\API\VehicleBrandApiController;
-use App\Http\Controllers\API\VehicleTypeApiController;
-use App\Http\Controllers\API\VehicleBrandModelApiController;
-use App\Http\Controllers\API\PassengerApiController;
-use App\Http\Controllers\API\AddressApiController;
 use App\Http\Controllers\API\EmployeeReportApiController;
-use App\Http\Controllers\API\TripApiController;
-use App\Http\Controllers\API\RatingApiController;
-use App\Http\Controllers\API\DepositInvoiceApiController;
-use App\Http\Controllers\API\LocationApiController;
-use App\Http\Controllers\API\SupportApiController;
-use App\Http\Controllers\API\UserCommentApiController;
-use App\Http\Controllers\API\InvoiceApiController;
-use App\Http\Controllers\API\QuestionApiController;
-use App\Http\Controllers\API\AnswerApiController;
-use App\Http\Controllers\API\TripCardApiController;
-use App\Http\Controllers\API\VehicleApiController;
-use App\Http\Controllers\API\NotificationApiController;
-use App\Http\Controllers\API\AgencyApiController;
-use App\Http\Controllers\API\RegionApiController;
 
 /*
 |--------------------------------------------------------------------------
