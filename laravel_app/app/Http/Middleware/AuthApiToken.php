@@ -15,19 +15,10 @@ class AuthApiToken
      */
     public function handle($request, Closure $next)
     {
-        $isAuthorize = false;
         $token = $request->bearerToken();
         if(!isset($token)) { $token = $request->token; }
 
-        // read server token
-        $server_token = null;
-        $filePath = "/run/secrets/inter_token.key";
-        if (file_exists($filePath)) {
-            $fileContent = file_get_contents($filePath);
-            $server_token = $fileContent;
-        }
-
-        if(isset($token) && $token == $server_token) {
+        if(isset($token)) {
             $isAuthorize =  true;
         } else {
             $isAuthorize =  false;

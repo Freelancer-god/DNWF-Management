@@ -22,6 +22,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Passport::loadKeysFrom('/run/secrets/');
+//        Passport::loadKeysFrom('/run/secrets/');
     }
 }
