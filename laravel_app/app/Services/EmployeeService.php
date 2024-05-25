@@ -8,7 +8,6 @@ use App\Models\EmployeeLog;
 use App\Repositories\Interfaces\EmployeeRepositoryInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
 use App\Services\Base\BaseService;
-use App\Services\Client\ExportExcelService;
 use App\Utils\StringHelpers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -19,18 +18,15 @@ class EmployeeService extends BaseService
 {
     protected $repo_base;
     protected $repo_role;
-    protected $service_export_excel;
     protected $with;
     protected $is_app;
 
     public function __construct(
         EmployeeRepositoryInterface $repo_base,
         RoleRepositoryInterface $repo_role,
-        ExportExcelService $service_export_excel
     ) {
         $this->repo_base                    = $repo_base;
         $this->repo_role                    = $repo_role;
-        $this->service_export_excel         = $service_export_excel;
         $this->is_app                       = false;
         $this->with                         = ['roles'];
     }
@@ -420,51 +416,6 @@ class EmployeeService extends BaseService
         ];
     }
 
-    /**
-     * Export excel
-    */
-
-    public function exportExcel($inputs){
-        $this->is_app = isset($inputs['is_app']) ? $inputs['is_app'] : false;
-        $text = null;
-        $columns = [];
-        $columnsHas = [];
-        $term = isset($inputs['term']) ? $inputs['term'] : [];
-        $with = isset($inputs['with']) ? $inputs['with'] : $this->with;
-        $page = isset($inputs['page']) ? $inputs['page'] : 1;
-        $limit = isset($inputs['limit']) ? $inputs['limit'] : 30;
-        $orderBy = isset($inputs['order_by']) ? $inputs['order_by'] : 'created_at';
-        $sort = isset($inputs['sort']) ? $inputs['sort'] : 'desc';
-        $joins = $this->getJoinTable();
-
-        $orderBy = $this->generateOrder($orderBy);
-        $select = $this->generateSelect($inputs, $this->getTableName());
-        // status
-        $columns = $this->generateColumn($inputs['filter'], $columns);
-        // generate conditions from term
-        $query = $this->generateQuery($term, $columns);
-        $columns = $query['columns'];
-        $text = $query['search'];
-
-        $datas = $this->repo_base->searchText($text, $columns, $columnsHas, $joins, $page, $limit, $orderBy, $sort, $with, $select);
-
-        if(count($datas) > 0) {
-            $request = [
-                'name' => config('excel_enums.employee.excel_name'),
-                'subject' => config('excel_enums.employee.subject_name'),
-                'data' => $this->formatExcelSelectData($datas),
-                'column' => $this->generateExcelColumn()
-            ];
-            return $this->service_export_excel->exportExcel($request);
-        }
-        return
-            [
-                'success' => false,
-                'error' =>  sprintf(config('error_code')['080'], 'Nhân viên'),
-                'code' => '080'
-            ];
-    }
-
     public function generateColumn($inputs, $columns) {
         // always add
 //        array_push($columns, $this->getTableName() . '.id not in ('. implode(',', config('constants.employee_admin')) .')');
@@ -479,47 +430,5 @@ class EmployeeService extends BaseService
         }
 
         return $columns;
-    }
-
-    public function formatExcelSelectData($datas) {
-        $res = [];
-        foreach($datas as $data) {
-            array_push($res, $this->formatExcelData($data));
-        }
-        return $res;
-    }
-
-    public function formatExcelData($data)
-    {
-        $role = isset($data->roles) && count($data->roles) > 0 ? $data->roles[0] : null;
-        $res = [
-            'id' => $data->id,
-            'reference' => $data->reference,
-            'phone' => $data->phone,
-            'name' => isset($data->name) ? $data->name : '',
-            'username' => isset($data->username) ? $data->username : '',
-            'birth_date' => isset($data->birth_date) ? Carbon::parse($data->birth_date)->format('d/m/Y'): '',
-            'sex' => isset($data->sex) ? config('enums.employee.sex')[$data->sex] : '',
-            'role_name' => isset($role) ? $role->name : '',
-            'created_at' => isset($data->created_at) ? Carbon::parse($data->created_at)->format('d/m/Y H:i:s'): '',
-            'updated_at' => isset($data->updated_at) ? Carbon::parse($data->updated_at)->format('d/m/Y H:i:s'): '',
-//            'last_login_at' => isset($data->last_login_at) ? Carbon::parse($data->last_login_at)->format('d/m/Y H:i:s'): '',
-        ];
-        return $res;
-    }
-
-    public function generateExcelColumn() {
-        return [
-            'id' => 'STT',
-            'reference' => 'Định danh',
-            'phone' => 'Số điện thoại',
-            'name' => 'Tên',
-            'username' => 'Tên đăng nhập',
-            'birth_date' => 'Ngày sinh',
-            'sex' => 'Giới tính',
-            'role_name' => 'Vai trò',
-            'created_at' => 'Ngày tạo',
-            'updated_at' => 'Ngày cập nhật',
-        ];
     }
 }
