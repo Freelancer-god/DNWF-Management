@@ -30,13 +30,13 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (\Exception $e, Request $request) {
-            if (!request()->hasHeader('Authorization')) {
-                return response()->json([
-                    'success' => false,
-                    'error' => sprintf(config('error_code')['401'],''),
-                    'code' => '401'
-                ], 401);
-            }
+//            if (!request()->hasHeader('Authorization')) {
+//                return response()->json([
+//                    'success' => false,
+//                    'error' => sprintf(config('error_code')['401'],''),
+//                    'code' => '401'
+//                ], 401);
+//            }
         });
     }
 

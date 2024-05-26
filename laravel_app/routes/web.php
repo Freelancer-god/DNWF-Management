@@ -33,22 +33,22 @@ use App\Http\Controllers\Admin\SupportController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/cms', [HomeController::class, 'index']);
-
-Route::get('/logout', [LoginController::class, 'doLogout']);
-Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
-Route::get('/', [LoginController::class, 'showLogin']);
-Route::post('/login', [LoginController::class, 'login']);
-
-Route::group(['prefix' => 'cms'], function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    // Role
-    Route::group(['prefix' => 'roles'], function () {
-        Route::get('/', [RoleController::class, 'index'])->name('roles.index');
-    });
-    // employee_list
-    Route::group(['prefix' => 'employees'], function () {
-        Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
-    });
-});
+//Route::get('/', [HomeController::class, 'index']);
+//Route::get('/cms', [HomeController::class, 'index']);
+//
+//Route::get('/logout', [LoginController::class, 'doLogout']);
+//Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
+//Route::get('/', [LoginController::class, 'showLogin']);
+//Route::post('/login', [LoginController::class, 'login']);
+//
+//Route::group(['prefix' => 'cms'], function () {
+//    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+//    // Role
+//    Route::group(['prefix' => 'roles'], function () {
+//        Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+//    });
+//    // employee_list
+//    Route::group(['prefix' => 'employees'], function () {
+//        Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
+//    });
+//});

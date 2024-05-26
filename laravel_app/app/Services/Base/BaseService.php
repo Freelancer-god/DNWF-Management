@@ -36,7 +36,6 @@ abstract class BaseService
     }
 
     public function store($inputs){
-        $this->is_app = isset($inputs['is_app']) ? $inputs['is_app'] : false;
         $validate = $this->checkInputs($inputs, null);
         if($validate['is_failed']) {
             return $validate;
@@ -50,7 +49,6 @@ abstract class BaseService
     }
 
     public function update($id, $inputs){
-        $this->is_app = isset($inputs['is_app']) ? $inputs['is_app'] : false;
         /** @var Model $model */
         $data = $this->repo_base->findById($id);
         if (!isset($data)) {
@@ -71,7 +69,6 @@ abstract class BaseService
     }
 
     public function findById($id) {
-        $this->is_app = false;
         /** @var Model $model */
         $data = $this->repo_base->findById($id);
 
@@ -85,7 +82,6 @@ abstract class BaseService
     }
 
     public function destroy($id){
-        $this->is_app = false;
         $data = $this->repo_base->findById($id);
 
         if (!isset($data)) {
