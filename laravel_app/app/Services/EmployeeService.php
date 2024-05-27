@@ -109,6 +109,8 @@ class EmployeeService extends BaseService
         $employee = $this->repo_base->findById($employee->id, $this->with);
 
         $token = $employee->createToken(config('constants.default_app'))->accessToken;
+
+
         return [
             'code' => '200',
             'data' => [
@@ -174,8 +176,8 @@ class EmployeeService extends BaseService
         ];
     }
 
-    public function loginWithToken($inputs) {
-        $employee = auth()->user();
+    public function loginWithToken() {
+        $employee = Auth::user();
         return [
             'code' => '200',
             'data' => [
@@ -270,7 +272,7 @@ class EmployeeService extends BaseService
         }
         $reference = isset($inputs['reference']) && !empty($inputs['reference']) ? $inputs['reference'] : null;
         if(!isset($id)) {
-            $inputs['reference'] = $this->generateReference($reference);
+            $inputs['reference'] = $this->generateReferenceEmployee($reference);
         }
         // generate reference
         return [
@@ -279,7 +281,7 @@ class EmployeeService extends BaseService
         ];
     }
 
-    public function generateReference($reference) {
+    public function generateReferenceEmployee($reference) {
         if(!isset($reference)) {
             return $this->repo_base->getReference();
         }
