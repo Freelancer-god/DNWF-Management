@@ -81,7 +81,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::middleware(['auth:api'])->group(function (){
         Route::get('/loginWithToken', [EmployeeApiController::class, 'loginWithToken']);
         Route::post('/changePassword', [EmployeeApiController::class, 'changePassword']);
-        Route::post('/logout', [EmployeeApiController::class, 'logout']);
+        Route::get('/logout', [EmployeeApiController::class, 'logout']);
     });
 });
 

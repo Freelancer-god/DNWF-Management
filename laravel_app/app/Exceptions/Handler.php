@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -29,14 +31,31 @@ class Handler extends ExceptionHandler
             //
         });
 
+        $this->reportable(function (MethodNotAllowedHttpException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => sprintf(config('error_code')['405'], ''),
+                'code' => '405'
+            ], 405);
+        });
+
+        $this->reportable(function (RouteNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => sprintf(config('error_code')['404'], ''),
+                'code' => '404'
+            ], 404);
+        });
+
         $this->renderable(function (\Exception $e, Request $request) {
-//            if (!request()->hasHeader('Authorization')) {
-//                return response()->json([
-//                    'success' => false,
-//                    'error' => sprintf(config('error_code')['401'],''),
-//                    'code' => '401'
-//                ], 401);
-//            }
+            if (!request()->hasHeader('Authorization')) {
+                return response()->json([
+                    'success' => false,
+                    'error' => sprintf(config('error_code')['401'],''),
+                    'code' => '401'
+                ], 401);
+            }
+            throw $e;
         });
     }
 
@@ -45,7 +64,7 @@ class Handler extends ExceptionHandler
         if ($request->hasHeader('Authorization')) {
             return response()->json([
                 'success' => false,
-                'error' => sprintf(config('error_code')[401],''),
+                'error' => sprintf(config('error_code')[401], ''),
                 'code' => 401
             ], 401);
         }
