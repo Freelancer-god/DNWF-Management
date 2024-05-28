@@ -252,34 +252,15 @@ abstract class BaseService
         }
         return $res;
     }
-
-    public function formatDataCms($data){
-        $res = json_decode($data, true);
-        if(isset($res['medias'])){
-            $res['medias'] = json_decode($res['medias'], true);
-        } else {
-            $res['medias'] = [];
-        }
-
-        return $res;
-    }
-
-    public function formatDataApp($data){
-        $res = json_decode($data, true);
-        if(isset($res['medias'])){
-            $res['medias'] = json_decode($res['medias'], true);
-        } else {
-            $res['medias'] = [];
-        }
-
-        return $res;
-    }
-
     public function formatData($data){
-        if($this->is_app) {
-            return $this->formatDataApp($data);
+        $res = json_decode($data, true);
+        if(isset($res['medias'])){
+            $res['medias'] = json_decode($res['medias'], true);
+        } else {
+            $res['medias'] = [];
         }
-        return $this->formatDataCms($data);
+
+        return $res;
     }
 
     public function checkInputs($inputs, $id){
@@ -340,5 +321,11 @@ abstract class BaseService
             $this->getTableName() .'.id',
             $this->getTableName() .'.reference'
         ];
+    }
+
+    public function generateReference($prefix, $number, $length = 6){
+        $paddedNumber = str_pad($number, $length - strlen($prefix), '0', STR_PAD_LEFT);
+        $reference = $prefix . $paddedNumber;
+        return $reference;
     }
 }

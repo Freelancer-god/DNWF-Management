@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EmployeeApiController;
 use App\Http\Controllers\API\RoleApiController;
 use App\Http\Controllers\API\EmployeeReportApiController;
+use App\Http\Controllers\API\ClubApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,37 +36,52 @@ Route::group(['prefix' => 'base'], function(){
 // local call
 Route::group(['prefix' => 'v1'], function () {
     // passenger api
-    Route::group(['prefix' => 'employees', ['middleware' => ['auth:api']]], function () {
-        Route::get('/findAll', [EmployeeApiController::class, 'findAll']);
-        Route::post('/store', [EmployeeApiController::class, 'store']);
-        Route::post('/update/{id}', [EmployeeApiController::class, 'update']);
-        Route::get('/findById/{id}', [EmployeeApiController::class, 'findById']);
-        Route::delete('/destroy/{id}', [EmployeeApiController::class, 'destroy']);
-        Route::post('/search', [EmployeeApiController::class, 'search']);
-        Route::post('/dict/getDictByIds', [EmployeeApiController::class, 'getDictByIds']);
-        Route::post('/dict/getDictByColumns', [EmployeeApiController::class, 'getDictByColumns']);
-        Route::post('/exportExcel', [EmployeeReportApiController::class, 'exportExcel']);
+    Route::group(['prefix' => 'employees'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [EmployeeApiController::class, 'findAll']);
+            Route::post('/store', [EmployeeApiController::class, 'store']);
+            Route::post('/update/{id}', [EmployeeApiController::class, 'update']);
+            Route::get('/findById/{id}', [EmployeeApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [EmployeeApiController::class, 'destroy']);
+            Route::post('/search', [EmployeeApiController::class, 'search']);
+            Route::post('/dict/getDictByIds', [EmployeeApiController::class, 'getDictByIds']);
+            Route::post('/dict/getDictByColumns', [EmployeeApiController::class, 'getDictByColumns']);
+            Route::post('/exportExcel', [EmployeeReportApiController::class, 'exportExcel']);
+        });
     });
     // roles api
-    Route::group(['prefix' => 'roles', ['middleware' => ['auth:api']]], function () {
-        Route::get('/findAll', [RoleApiController::class, 'findAll']);
-        Route::post('/store', [RoleApiController::class, 'store']);
-        Route::post('/update/{id}', [RoleApiController::class, 'update']);
-        Route::get('/findById/{id}', [RoleApiController::class, 'findById']);
-        Route::delete('/destroy/{id}', [RoleApiController::class, 'destroy']);
-        Route::post('/search', [RoleApiController::class, 'search']);
-        Route::post('/dict/getDictByIds', [RoleApiController::class, 'getDictByIds']);
-        Route::post('/dict/getDictByColumns', [RoleApiController::class, 'getDictByColumns']);
+    Route::group(['prefix' => 'roles'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [RoleApiController::class, 'findAll']);
+            Route::post('/store', [RoleApiController::class, 'store']);
+            Route::put('/update/{id}', [RoleApiController::class, 'update']);
+            Route::get('/findById/{id}', [RoleApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [RoleApiController::class, 'destroy']);
+            Route::post('/search', [RoleApiController::class, 'search']);
+            Route::post('/dict/getDictByIds', [RoleApiController::class, 'getDictByIds']);
+            Route::post('/dict/getDictByColumns', [RoleApiController::class, 'getDictByColumns']);
+        });
     });
 
+    Route::group(['prefix' => 'clubs'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [ClubApiController::class, 'findAll']);
+            Route::post('/store', [ClubApiController::class, 'store']);
+            Route::put('/update/{id}', [ClubApiController::class, 'update']);
+            Route::get('/findById/{id}', [ClubApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [ClubApiController::class, 'destroy']);
+            Route::post('/search', [ClubApiController::class, 'search']);
+            Route::put('/updateConfirmStatus/{id}', [ClubApiController::class, 'updateConfirmStatus']);
+        });
+    });
 
 
 
     Route::post('/login', [EmployeeApiController::class, 'loginWithPassword']);
-    Route::group(['middleware' => ['auth:api']], function () {
-        Route::post('/loginWithToken', [EmployeeApiController::class, 'loginWithToken']);
+    Route::middleware(['auth:api'])->group(function (){
+        Route::get('/loginWithToken', [EmployeeApiController::class, 'loginWithToken']);
         Route::post('/changePassword', [EmployeeApiController::class, 'changePassword']);
-        Route::post('/logout', [EmployeeApiController::class, 'logout']);
+        Route::get('/logout', [EmployeeApiController::class, 'logout']);
     });
 });
 

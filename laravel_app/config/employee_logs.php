@@ -5,7 +5,7 @@ return [
         0 => 'Hệ thống',
         1 => 'Nhân viên',
         2 => 'Vai trò',
-        3 => 'Khách hàng',
+        3 => 'Chi hội',
         4 => 'Hóa đơn chuyến đi',
         5 => 'Đánh giá khách hàng',
         6 => 'Quản lý tài xế',

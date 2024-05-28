@@ -25,20 +25,7 @@ class EmployeeLog extends Model
     const SYSTEM_LOG                = 0;
     const EMPLOYEE_LOG              = 1;
     const ROLE_LOG                  = 2;
-    const PASSENGER_LOG             = 3;
-    const INVOICE_LOG               = 4;
-    const DRIVER_RATING_LOG         = 5;
-    const DRIVER_LOG                = 6;
-    const DRIVER_FORM_LOG           = 7;
-    const VEHICLE_FORM_LOG          = 8;
-    const TRIP_LOG                  = 9;
-    const DEPOSIT_INVOICE_LOG       = 10;
-    const SUPPORT_LOG               = 11;
-    const CONFIG_LOG                = 12;
-    const QUESTION_LOG              = 13;
-    const ANSWER_LOG                = 14;
-    const USER_COMMENT              = 15;
-    const NOTIFICATION_LOG          = 16;
+    const CLUB_LOG                  = 3;
 
     protected $fillable = [
         'id',
@@ -170,89 +157,12 @@ class EmployeeLog extends Model
                 return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', isset($data['name']) ? $data['name'] : '', isset($data['phone']) ? $data['phone'] : '');
             case self::ROLE_LOG:
                 return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['name']) ? $data['name'] : '');
-            case self::PASSENGER_LOG:
+            case self::CLUB_LOG:
                 return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['name']) ? $data['name'] : '', isset($data['phone']) ? $data['phone'] : '');
-            case self::INVOICE_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', Carbon::parse($data['updated_at'])->timezone('GMT+7')->format('d/m/Y H:i:s'));
-            case self::DRIVER_RATING_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '');
-            case self::DRIVER_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', isset($data['phone']) ? $data['phone'] : '', static::setDriverContent($data));
-            case self::DRIVER_FORM_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), static::setDriverFormContent($data));
-            case self::VEHICLE_FORM_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), static::setVehicleFormContent($data));
-            case self::TRIP_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', static::setTripContent($data));
-            case self::DEPOSIT_INVOICE_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', static::setDepositInvoiceContent($data));
-            case self::SUPPORT_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['title']) ? $data['title'] : '');
-            case self::CONFIG_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset(config('enums.configs.types')[$data['type']]) ? config('enums.configs.types')[$data['type']] : '');
-            case self::QUESTION_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', '');
-            case self::ANSWER_LOG:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type), isset($data['reference']) ? $data['reference'] : '', '');
-            case self::USER_COMMENT:
-                return sprintf(config('employee_logs.content')[$type], static::createContentActionType($action, $type));
-        }
+           }
     }
 
     private static function createContentActionType($action, $type) {
         return config('employee_logs.action')[$action];
     }
-
-    private static function setDriverContent($data) {
-        return '';
-    }
-
-    private static function setTripContent($data) {
-        return '';
-    }
-
-    private static function setDriverFormContent($data) {
-        return '';
-    }
-
-    private static function setVehicleFormContent($data) {
-        return '';
-    }
-
-    private static function setDepositInvoiceContent($data) {
-        $content = null;
-        if(isset($data) && isset($data['reference'])) {
-            $content = 'Phiếu nạp tiền:'. $data['reference'] .', số  tiền: ' . $data['total'] . '<br/>'
-                . 'Ngày tạo: ' . Carbon::parse($data['created_at'])->timezone('GMT+7')->format('d/m/Y H:i:s') . '<br/>'
-                . 'Tài xế ('. $data['driver_reference'] .'): ' . $data['driver_name'] . ' - ' . $data['driver_phone'] .'<br/>';
-            if($data['status'] >= 3) {
-                $content .= 'xác nhận bởi: ' . $data['confirmed_name'] . ' - ' . $data['confirmed_name'] . '<br/>';
-                if($data['status'] == 3) {
-                    $content .= 'Trạng thái xác nhận';
-                } else if($data['status'] == 4) {
-                    $content .= 'Trạng thái đã hủy';
-                }
-            } else {
-                if($data['status'] == 1) {
-                    $content .= 'Trạng thái nháp';
-                } else if($data['status'] == 2) {
-                    $content .= 'Trạng thái mới tạo';
-                }
-            }
-        }
-        return $content;
-    }
-
-    private static function supplyOrderContent($data) {
-        $content = '';
-        if(sizeof($data->supply_order_details) > 0){
-            $content = ', bao gồm: <br/>';
-            foreach($data->supply_order_details as $detail){
-                $content .= ' - ' . $detail->product_name . ': ' . $detail->quantity . '*' . $detail->price;
-            }
-        }
-
-        return $content;
-    }
-
 }

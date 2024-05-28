@@ -29,9 +29,8 @@ class EmployeeApiController extends BaseApiController
         return $this->sendResponse($resp['data'], 'Login with pasword success');
     }
 
-    public function loginWithToken(Request $request){
-        $inputs = $request->all();
-        $resp = $this->service_base->loginWithToken($inputs);
+    public function loginWithToken(){
+        $resp = $this->service_base->loginWithToken();
         if($resp['code'] !== '200'){
             return $this->sendError($resp['message'], $resp['code']);
         }
