@@ -86,6 +86,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+        
+      - name: Debug Working Directory
+        run: |
+          pwd
+          ls -la
+
+      - name: Debug .env file existence
+        run: |
+          ls -la ./laravel_app/.env || echo ".env file not found"
 
       - name: Build and push Docker image
         run: |
