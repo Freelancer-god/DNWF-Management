@@ -16,3 +16,5 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```sh
 docker push livipst2/app:latest
 ```
+
+test image build, pls work
