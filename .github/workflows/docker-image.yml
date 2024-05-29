@@ -8,9 +8,6 @@ on:
 jobs:
   create-env:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./laravel_app
     steps:
       - uses: actions/checkout@v2
       - name: Create env file
@@ -98,5 +95,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml push
+          docker-compose -f docker-compose.prod.yml build
+          docker-compose -f docker-compose.prod.yml push
