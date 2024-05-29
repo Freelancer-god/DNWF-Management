@@ -6,10 +6,14 @@ on:
       - master
 
 jobs:
-  create-env:
+  build:
+    needs: create-env
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Create env file
         run: |
           touch .env
@@ -70,28 +74,11 @@ jobs:
           echo "PHP_OPCACHE_VALIDATE_TIMESTAMPS=${{ secrets.PHP_OPCACHE_VALIDATE_TIMESTAMPS }}" >> .env
           cat .env
 
-  build:
-    needs: create-env
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-        
-      - name: Debug Working Directory
-        run: |
-          pwd
-          ls -la
-
-      - name: Debug .env file existence
-        run: |
-          ls -la ./laravel_app/.env || echo ".env file not found"
 
       - name: Build and push Docker image
         run: |
