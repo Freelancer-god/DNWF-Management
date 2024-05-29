@@ -8,11 +8,12 @@ on:
 jobs:
   create-env:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./laravel_app
     steps:
       - uses: actions/checkout@v2
       - name: Create env file
-        working-directory: ./laravel_app
         run: |
           touch .env
           echo "APP_NAME=${{ secrets.APP_NAME }}" > .env
