@@ -51,28 +51,11 @@ return [
             1 => 'Đang hoạt động',
         ]
     ],
-    'configs' => [
+    'organization' => [
         'types' => [
-            1 => 'Tổng đài',
-            2 => 'Email hỗ trợ',
-            3 => 'Thông tin về cudidi',
-            4 => 'Thông tin hủy tài khoản của khách hàng',
-            5 => 'Thông tin hủy tài khoản của tài xế',
-            6 => 'Thông tin chính sách của khách hàng',
-            7 => 'Thông tin điều khoản của khách hàng',
-            8 => 'Thông tin chính sách của tài xế',
-
-            9 => 'Nội dung về làm đẹp',
-            10 => 'Nội dung về giáo dục',
-            11 => 'Nội dung về y tế',
-            12 => 'Nội dung về bảo hiểm sức khỏe và du lịch',
-            13 => 'Nội dung về salon ô tô cao cấp',
-            14 => 'Nội dung về thuê tài xế riêng',
-            17 => 'Nội dung về bảo dưỡng sửa chữa cho tài xế',
-            18 => 'Nội dung về bảo hiểm cho tài xế',
-
-            15 => 'Thông tin số tài khoản phiếu đặt cọc cudidi',
-            16 => 'Thông tin ngân hàng phiếu đặt cọc cudidi',
+            1 => 'Wushu',
+            2 => 'Lân sư rồng',
+            3 => 'Lân sư rồng và wushu',
         ]
     ]
 
