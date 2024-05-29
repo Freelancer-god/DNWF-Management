@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create env file
+        run: ls -la /home/runner/work/DNWF-Management/DNWF-Management/laravel_app
+
         run: |
           touch .env
           echo "APP_NAME=${{ secrets.APP_NAME }}" > .env
