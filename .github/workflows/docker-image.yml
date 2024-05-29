@@ -12,65 +12,68 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          path: 'laravel_app'
 
       - name: Create env file
         run: |
-          echo "APP_NAME=${{ secrets.APP_NAME }}" > laravel_app/.env
-          echo "APP_ENV=${{ secrets.APP_ENV }}" >> laravel_app/.env
-          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> laravel_app/.env
-          echo "APP_KEY=${{ secrets.APP_KEY }}" >> laravel_app/.env
-          echo "APP_DEBUG=${{ secrets.APP_DEBUG }}" >> laravel_app/.env
-          echo "APP_URL=${{ secrets.APP_URL }}" >> laravel_app/.env
-          echo "LOG_CHANNEL=${{ secrets.LOG_CHANNEL }}" >> laravel_app/.env
-          echo "LOG_DEPRECATIONS_CHANNEL=${{ secrets.LOG_DEPRECATIONS_CHANNEL }}" >> laravel_app/.env
-          echo "LOG_LEVEL=${{ secrets.LOG_LEVEL }}" >> laravel_app/.env
-          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> laravel_app/.env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> laravel_app/.env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> laravel_app/.env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> laravel_app/.env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> laravel_app/.env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> laravel_app/.env
-          echo "BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }}" >> laravel_app/.env
-          echo "CACHE_DRIVER=${{ secrets.CACHE_DRIVER }}" >> laravel_app/.env
-          echo "FILESYSTEM_DISK=${{ secrets.FILESYSTEM_DISK }}" >> laravel_app/.env
-          echo "QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}" >> laravel_app/.env
-          echo "SESSION_DRIVER=${{ secrets.SESSION_DRIVER }}" >> laravel_app/.env
-          echo "SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }}" >> laravel_app/.env
-          echo "MEMCACHED_HOST=${{ secrets.MEMCACHED_HOST }}" >> laravel_app/.env
-          echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> laravel_app/.env
-          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> laravel_app/.env
-          echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> laravel_app/.env
-          echo "MAIL_MAILER=${{ secrets.MAIL_MAILER }}" >> laravel_app/.env
-          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> laravel_app/.env
-          echo "MAIL_PORT=${{ secrets.MAIL_PORT }}" >> laravel_app/.env
-          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> laravel_app/.env
-          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> laravel_app/.env
-          echo "MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION }}" >> laravel_app/.env
-          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> laravel_app/.env
-          echo "MAIL_FROM_NAME=${{ secrets.MAIL_FROM_NAME }}" >> laravel_app/.env
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> laravel_app/.env
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> laravel_app/.env
-          echo "AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}" >> laravel_app/.env
-          echo "AWS_BUCKET=${{ secrets.AWS_BUCKET }}" >> laravel_app/.env
-          echo "AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}" >> laravel_app/.env
-          echo "PUSHER_APP_ID=${{ secrets.PUSHER_APP_ID }}" >> laravel_app/.env
-          echo "PUSHER_APP_KEY=${{ secrets.PUSHER_APP_KEY }}" >> laravel_app/.env
-          echo "PUSHER_APP_SECRET=${{ secrets.PUSHER_APP_SECRET }}" >> laravel_app/.env
-          echo "PUSHER_HOST=${{ secrets.PUSHER_HOST }}" >> laravel_app/.env
-          echo "PUSHER_PORT=${{ secrets.PUSHER_PORT }}" >> laravel_app/.env
-          echo "PUSHER_SCHEME=${{ secrets.PUSHER_SCHEME }}" >> laravel_app/.env
-          echo "PUSHER_APP_CLUSTER=${{ secrets.PUSHER_APP_CLUSTER }}" >> laravel_app/.env
-          echo "VITE_APP_NAME=${{ secrets.VITE_APP_NAME }}" >> laravel_app/.env
-          echo "VITE_PUSHER_APP_KEY=${{ secrets.VITE_PUSHER_APP_KEY }}" >> laravel_app/.env
-          echo "VITE_PUSHER_HOST=${{ secrets.VITE_PUSHER_HOST }}" >> laravel_app/.env
-          echo "VITE_PUSHER_PORT=${{ secrets.VITE_PUSHER_PORT }}" >> laravel_app/.env
-          echo "VITE_PUSHER_SCHEME=${{ secrets.VITE_PUSHER_SCHEME }}" >> laravel_app/.env
-          echo "VITE_PUSHER_APP_CLUSTER=${{ secrets.VITE_PUSHER_APP_CLUSTER }}" >> laravel_app/.env
-          echo "SCOUT_DRIVER=${{ secrets.SCOUT_DRIVER }}" >> laravel_app/.env
-          echo "MEILISEARCH_HOST=${{ secrets.MEILISEARCH_HOST }}" >> laravel_app/.env
-          echo "MEILISEARCH_NO_ANALYTICS=${{ secrets.MEILISEARCH_NO_ANALYTICS }}" >> laravel_app/.env
-          echo "PHP_OPCACHE_VALIDATE_TIMESTAMPS=${{ secrets.PHP_OPCACHE_VALIDATE_TIMESTAMPS }}" >> laravel_app/.env
-          cat laravel_app/.env
+          touch .env
+          echo "APP_NAME=${{ secrets.APP_NAME }}" > .env
+          echo "APP_ENV=${{ secrets.APP_ENV }}" >> .env
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "APP_DEBUG=${{ secrets.APP_DEBUG }}" >> .env
+          echo "APP_URL=${{ secrets.APP_URL }}" >> .env
+          echo "LOG_CHANNEL=${{ secrets.LOG_CHANNEL }}" >> .env
+          echo "LOG_DEPRECATIONS_CHANNEL=${{ secrets.LOG_DEPRECATIONS_CHANNEL }}" >> .env
+          echo "LOG_LEVEL=${{ secrets.LOG_LEVEL }}" >> .env
+          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }}" >> .env
+          echo "CACHE_DRIVER=${{ secrets.CACHE_DRIVER }}" >> .env
+          echo "FILESYSTEM_DISK=${{ secrets.FILESYSTEM_DISK }}" >> .env
+          echo "QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}" >> .env
+          echo "SESSION_DRIVER=${{ secrets.SESSION_DRIVER }}" >> .env
+          echo "SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }}" >> .env
+          echo "MEMCACHED_HOST=${{ secrets.MEMCACHED_HOST }}" >> .env
+          echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env
+          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> .env
+          echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env
+          echo "MAIL_MAILER=${{ secrets.MAIL_MAILER }}" >> .env
+          echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
+          echo "MAIL_PORT=${{ secrets.MAIL_PORT }}" >> .env
+          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
+          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
+          echo "MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION }}" >> .env
+          echo "MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}" >> .env
+          echo "MAIL_FROM_NAME=${{ secrets.MAIL_FROM_NAME }}" >> .env
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+          echo "AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}" >> .env
+          echo "AWS_BUCKET=${{ secrets.AWS_BUCKET }}" >> .env
+          echo "AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}" >> .env
+          echo "PUSHER_APP_ID=${{ secrets.PUSHER_APP_ID }}" >> .env
+          echo "PUSHER_APP_KEY=${{ secrets.PUSHER_APP_KEY }}" >> .env
+          echo "PUSHER_APP_SECRET=${{ secrets.PUSHER_APP_SECRET }}" >> .env
+          echo "PUSHER_HOST=${{ secrets.PUSHER_HOST }}" >> .env
+          echo "PUSHER_PORT=${{ secrets.PUSHER_PORT }}" >> .env
+          echo "PUSHER_SCHEME=${{ secrets.PUSHER_SCHEME }}" >> .env
+          echo "PUSHER_APP_CLUSTER=${{ secrets.PUSHER_APP_CLUSTER }}" >> .env
+          echo "VITE_APP_NAME=${{ secrets.VITE_APP_NAME }}" >> .env
+          echo "VITE_PUSHER_APP_KEY=${{ secrets.VITE_PUSHER_APP_KEY }}" >> .env
+          echo "VITE_PUSHER_HOST=${{ secrets.VITE_PUSHER_HOST }}" >> .env
+          echo "VITE_PUSHER_PORT=${{ secrets.VITE_PUSHER_PORT }}" >> .env
+          echo "VITE_PUSHER_SCHEME=${{ secrets.VITE_PUSHER_SCHEME }}" >> .env
+          echo "VITE_PUSHER_APP_CLUSTER=${{ secrets.VITE_PUSHER_APP_CLUSTER }}" >> .env
+          echo "SCOUT_DRIVER=${{ secrets.SCOUT_DRIVER }}" >> .env
+          echo "MEILISEARCH_HOST=${{ secrets.MEILISEARCH_HOST }}" >> .env
+          echo "MEILISEARCH_NO_ANALYTICS=${{ secrets.MEILISEARCH_NO_ANALYTICS }}" >> .env
+          echo "PHP_OPCACHE_VALIDATE_TIMESTAMPS=${{ secrets.PHP_OPCACHE_VALIDATE_TIMESTAMPS }}" >> .env
+          cat .env
 
   build:
     needs: create-env
