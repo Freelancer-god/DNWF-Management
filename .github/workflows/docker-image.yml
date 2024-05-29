@@ -16,6 +16,7 @@ jobs:
           path: 'laravel_app'
 
       - name: Create env file
+        working-directory: ./laravel_app
         run: |
           touch .env
           echo "APP_NAME=${{ secrets.APP_NAME }}" > .env
