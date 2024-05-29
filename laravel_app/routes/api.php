@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\SponsorApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EmployeeApiController;
 use App\Http\Controllers\API\RoleApiController;
@@ -71,6 +72,19 @@ Route::group(['prefix' => 'v1'], function () {
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'updateConfirmStatus']);
         });
     });
+    Route::group(['prefix' => 'sponsors'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [SponsorApiController::class, 'findAll']);
+            Route::post('/store', [SponsorApiController::class, 'store']);
+            Route::put('/update/{id}', [SponsorApiController::class, 'update']);
+            Route::get('/findById/{id}', [SponsorApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [SponsorApiController::class, 'destroy']);
+            Route::post('/search', [SponsorApiController::class, 'search']);
+            Route::put('/updateConfirmStatus/{id}', [SponsorApiController::class, 'updateConfirmStatus']);
+        });
+    });
+
+
 
     //Hoi vien
     Route::group(['prefix' => 'members'], function () {
