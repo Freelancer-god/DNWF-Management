@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          path: 'laravel_app'
 
       - name: Create env file
         run: |
