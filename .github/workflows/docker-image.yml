@@ -72,7 +72,7 @@ jobs:
           echo "MEILISEARCH_HOST=${{ secrets.MEILISEARCH_HOST }}" >> .env
           echo "MEILISEARCH_NO_ANALYTICS=${{ secrets.MEILISEARCH_NO_ANALYTICS }}" >> .env
           echo "PHP_OPCACHE_VALIDATE_TIMESTAMPS=${{ secrets.PHP_OPCACHE_VALIDATE_TIMESTAMPS }}" >> .env
-          cat .env
+          cat laravel_app/.env
 
   build:
     needs: create-env
