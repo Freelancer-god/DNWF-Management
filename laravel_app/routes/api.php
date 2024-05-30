@@ -75,13 +75,27 @@ Route::group(['prefix' => 'v1'], function () {
         });
     });
 
-
+    Route::group(['prefix' => 'organizations'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [\App\Http\Controllers\API\OrganizationApiController::class, 'findAll']);
+            Route::post('/store', [\App\Http\Controllers\API\OrganizationApiController::class, 'store']);
+            Route::put('/update/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'update']);
+            Route::get('/findById/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'destroy']);
+            Route::post('/search', [\App\Http\Controllers\API\OrganizationApiController::class, 'search']);
+            Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'updateConfirmStatus']);
+        });
+    });
 
     Route::post('/login', [EmployeeApiController::class, 'loginWithPassword']);
     Route::middleware(['auth:api'])->group(function (){
         Route::get('/loginWithToken', [EmployeeApiController::class, 'loginWithToken']);
         Route::post('/changePassword', [EmployeeApiController::class, 'changePassword']);
         Route::get('/logout', [EmployeeApiController::class, 'logout']);
+    });
+
+    Route::get('/hello', function () {
+        return response()->json(['message' => 'Hello World']);
     });
 });
 

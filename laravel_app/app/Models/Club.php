@@ -69,4 +69,8 @@ class Club extends Model
     {
         return self::search($term);
     }
+
+    public function organizations(){
+        return $this->hasMany(Organization::class, 'club_id');
+    }
 }
