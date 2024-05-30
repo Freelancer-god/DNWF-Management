@@ -32,27 +32,27 @@ class Handler extends ExceptionHandler
         });
 
         $this->reportable(function (MethodNotAllowedHttpException $e) {
-            return response()->json([
-                'success' => false,
-                'error' => sprintf(config('error_code')['405'], ''),
-                'code' => '405'
-            ], 405);
+//            return response()->json([
+//                'success' => false,
+//                'error' => sprintf(config('error_code')['405'], ''),
+//                'code' => '405'
+//            ], 405);
         });
 
         $this->renderable(function (RouteNotFoundException $e, Request $request) {
-            return response()->json([
-                'success' => false,
-                'error' => sprintf(config('error_code')['404'],''),
-                'code' => '404'
-            ], 404);
+//            return response()->json([
+//                'success' => false,
+//                'error' => sprintf(config('error_code')['404'],''),
+//                'code' => '404'
+//            ], 404);
         });
 
         $this->renderable(function (\Exception $e, Request $request) {
-            return response()->json([
-                'success' => false,
-                'error' => sprintf(config('error_code')['500']) . ' - ' . $e->getMessage(),
-                'code' => '500'
-            ], 500);
+//            return response()->json([
+//                'success' => false,
+//                'error' => sprintf(config('error_code')['500']) . ' - ' . $e->getMessage(),
+//                'code' => '500'
+//            ], 500);
         });
     }
 
