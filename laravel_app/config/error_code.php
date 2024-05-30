@@ -28,9 +28,9 @@ return [
     '100' => 'Không thể login %s',
     '141' => 'Không thể kết nối đến server. Vui lòng thử lại sau',
     '401' => 'Bạn cần đăng nhập để sử dụng chức năng này',
-    '404' => 'Không tìm thấy trang yêu cầu %s',
+    '404' => 'Not found',
     '405' => 'Phương thức không hợp lệ',
     '403' => 'Truy cập không được phép %s',
-    '500' => 'Bad request %s',
+    '500' => 'Server error %s',
     '999' => 'Lỗi không xác định %s',
 ];
