@@ -58,7 +58,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
         environment:
-            WATCHTOWER_CLEANUP: "true"
+            WATCHTOWER_CLEANUP: true
             WATCHTOWER_POLL_INTERVAL: 120  # Check for updates every 2 minutes
 
 networks:
