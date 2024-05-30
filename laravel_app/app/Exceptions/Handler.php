@@ -39,23 +39,20 @@ class Handler extends ExceptionHandler
             ], 405);
         });
 
-        $this->reportable(function (RouteNotFoundException $e) {
+        $this->renderable(function (RouteNotFoundException $e, Request $request) {
             return response()->json([
                 'success' => false,
-                'error' => sprintf(config('error_code')['404'], ''),
+                'error' => sprintf(config('error_code')['404'],''),
                 'code' => '404'
             ], 404);
         });
 
         $this->renderable(function (\Exception $e, Request $request) {
-            if (!request()->hasHeader('Authorization')) {
-                return response()->json([
-                    'success' => false,
-                    'error' => sprintf(config('error_code')['401'],''),
-                    'code' => '401'
-                ], 401);
-            }
-            throw $e;
+            return response()->json([
+                'success' => false,
+                'error' => sprintf(config('error_code')['500']) . ' - ' . $e->getMessage(),
+                'code' => '500'
+            ], 500);
         });
     }
 
