@@ -16,6 +16,8 @@ services:
             - ./laravel_app:/var/www/laravel_app
 #            - '.:/var/www'
             - /var/www/laravel_app/vendor
+        networks:
+            - my-duplicati-net
 
     mysql-db:
         image: 'mariadb:11.1'
@@ -33,6 +35,8 @@ services:
             - db:/var/lib/mysql
         labels:
             - "com.centurylinklabs.watchtower.enable=false"
+        networks:
+            - my-duplicati-net
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
@@ -44,6 +48,8 @@ services:
             - "8081:80"
         labels:
             - "com.centurylinklabs.watchtower.enable=false"
+        networks:
+            - my-duplicati-net
     
     watchtower:
         image: containrrr/watchtower
@@ -53,6 +59,11 @@ services:
         environment:
             WATCHTOWER_CLEANUP: "true"
             WATCHTOWER_POLL_INTERVAL: 120  # Check for updates every 2 minutes
+
+networks:
+    my-duplicati-net:
+        external: true
+        name: custom_network
 
 volumes:
     db:
