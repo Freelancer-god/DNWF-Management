@@ -93,6 +93,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/changePassword', [EmployeeApiController::class, 'changePassword']);
         Route::get('/logout', [EmployeeApiController::class, 'logout']);
     });
+
+    Route::get('/hello', function () {
+        return response()->json(['message' => 'Hello World']);
+    });
 });
 
 
