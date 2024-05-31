@@ -27,6 +27,7 @@ class EmployeeLog extends Model
     const ROLE_LOG                  = 2;
     const CLUB_LOG                  = 3;
     const SPONSOR_LOG               = 4;
+    const SPONSOR_CARE_LOG          = 4;
 
     protected $fillable = [
         'id',

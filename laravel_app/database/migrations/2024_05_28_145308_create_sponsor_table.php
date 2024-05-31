@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sponsors', function (Blueprint $table) {
+        Schema::create('sponsor', function (Blueprint $table) {
             $table->id();
             $table->enum('sponsor_type', ['individual', 'organization']); // Only allow values 'individual' or 'organization' for sponsor type
             $table->enum('method', ['money', 'in_kind'])->nullable(); // Only allow values 'money' or 'in_kind' for method
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sponsors');
+        Schema::dropIfExists('sponsor');
     }
 };

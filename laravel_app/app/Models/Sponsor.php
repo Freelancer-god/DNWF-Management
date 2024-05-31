@@ -12,7 +12,7 @@ class Sponsor extends Model
 {
     use SearchableTrait, HasFactory;
 
-    public $table = 'sponsors';
+    public $table = 'sponsor';
 
     protected $fillable = [
         'sponsor_type',
@@ -51,9 +51,9 @@ class Sponsor extends Model
 
     protected $searchable = [
         'columns' => [
-            'sponsors.name' => 10,
-            'sponsors.sponsor_type' => 10,
-            'sponsors.method' => 10,
+            'sponsor.name' => 10,
+            'sponsor.sponsor_type' => 10,
+            'sponsor.method' => 10,
         ]
     ];
 
@@ -71,5 +71,26 @@ class Sponsor extends Model
     public function searchText($term)
     {
         return self::search($term);
+    }
+
+    // Mối quan hệ một-nhiều với SponsorContract
+    public function sponsorContracts()
+    {
+        return $this->hasMany(SponsorContract::class);
+    }
+
+    // Mối quan hệ một-nhiều với SponsorCare (nếu có)
+    public function sponsorCares()
+    {
+        return $this->hasMany(SponsorCare::class);
+    }
+    public static function idExists($id)
+    {
+        // Tạo một instance của class Builder
+        $query = static::query();
+    
+        // Sử dụng phương thức where() trên instance của class Builder để thêm điều kiện
+        // Kiểm tra xem có bản ghi nào có ID nhất định không
+        return $query->where('id', $id)->exists();
     }
 }
