@@ -22,9 +22,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
         
-      - name: Build and push Docker image
-        run: |
-          DOCKER_BUILDKIT=1 docker buildx create --use
-          DOCKER_BUILDKIT=1 docker buildx bake --file docker-compose.prod.yml --push --set metadata.target=server
-        env:
-          DOCKER_CLI_EXPERIMENTAL: enabled
+      - name: Build docker-compose
+        run: docker buildx bake --set *.context=.docker --file docker-compose.prod.yml --file docker-compose-cache.json
