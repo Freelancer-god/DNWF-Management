@@ -16,39 +16,6 @@ services:
         networks:
             - my-duplicati-net
 
-    mysql-db:
-        image: 'mariadb:11.1'
-        ports:
-            - 3306:3306
-        environment:
-            MYSQL_ROOT_PASSWORD: secret_pass
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: dnwf_db
-            MYSQL_USER: root
-            MYSQL_PASSWORD: secret_pass
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        volumes:
-#            - /Users/admin/vol/mysql:/var/lib/mysql
-            - db:/var/lib/mysql
-        networks:
-            - my-duplicati-net
-        labels:
-            - "com.centurylinklabs.watchtower.enable=false"
-
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:latest
-        environment:
-            PMA_HOST: mysql-db
-            PMA_PORT: 3306
-            UPLOAD_LIMIT: 200M
-        ports:
-            - "8081:80"
-        labels:
-            - "com.centurylinklabs.watchtower.enable=false"
-        networks:
-            - my-duplicati-net
-
     watchtower:
         image: containrrr/watchtower
         container_name: watchtower
