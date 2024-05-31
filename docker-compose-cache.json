@@ -1,0 +1,15 @@
+{
+    "target": {
+      "server": {
+        "cache-from": [
+          "type=registry,ref=ghcr.io/freelancer-god/server:cache"
+        ],
+        "cache-to": [
+          "type=registry,ref=ghcr.io/freelancer-god/server:cache"
+        ],
+        "output": [
+          "type=docker"
+        ]
+      }
+    }
+  }
