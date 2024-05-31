@@ -12,7 +12,7 @@ services:
         environment:
             CONTAINER_ROLE: app
             WATCHTOWER_CLEANUP: "true"
-        env_file: laravel_app/.env
+        env_file: .env
         networks:
             - my-duplicati-net
 
