@@ -23,4 +23,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         
       - name: Build docker-compose
-        run: docker buildx bake --set *.context=.docker --file docker-compose.prod.yml --file docker-compose-cache.json
+        run: docker buildx bake --file docker-compose.prod.yml --file docker-compose-cache.json
