@@ -8,10 +8,12 @@
         "php": "^8.1",
         "corbosman/laravel-passport-claims": "^5.2",
         "guzzlehttp/guzzle": "^7.8",
+        "intervention/image": "^3.6",
         "laravel/framework": "^10.10",
         "laravel/passport": "^11.9",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "*",
         "nicolaslopezj/searchable": "^1.13",
         "santigarcor/laratrust": "^8.2"
     },

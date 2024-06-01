@@ -47,7 +47,6 @@ class Handler extends ExceptionHandler
 //            ], 404);
         });
 
-        //aaa
         $this->renderable(function (\Exception $e, Request $request) {
 //            return response()->json([
 //                'success' => false,

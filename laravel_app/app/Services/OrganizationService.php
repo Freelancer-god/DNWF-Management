@@ -178,6 +178,10 @@ class OrganizationService extends BaseService
         if(isset($data->club)){
             $res['club'] = json_decode($data->club, true);
         }
+        $res['organization'] = null;
+        if(isset($data->organization)){
+            $res['organization'] = json_decode($data->organization, true);
+        }
 
         return $res;
     }
