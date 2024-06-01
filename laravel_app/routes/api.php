@@ -88,11 +88,15 @@ Route::group(['prefix' => 'v1'], function () {
     //file va hinh anh
     Route::group(['prefix' => 'files'], function () {
         Route::middleware(['auth:api'])->group(function (){
-//            Route::post('/uploadImages', [\App\Http\Controllers\API\FileApiController::class, 'uploadImages']);
-//            Route::post('/uploadFiles', [\App\Http\Controllers\API\FileApiController::class, 'uploadFiles']);
             Route::post('/uploadImage', [\App\Http\Controllers\API\FileApiController::class, 'uploadImage']);
             Route::post('/uploadFile', [\App\Http\Controllers\API\FileApiController::class, 'uploadFile']);
             Route::delete('/delete/{id}', [\App\Http\Controllers\API\FileApiController::class, 'delete']);
+        });
+    });
+
+    Route::group(['prefix' => 'excel'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::post('/exportMembers', [\App\Http\Controllers\API\ExportApiController::class, 'exportMembers']);
         });
     });
 

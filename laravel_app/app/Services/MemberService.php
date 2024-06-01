@@ -137,7 +137,7 @@ class MemberService extends BaseService
         if(!isset($inputs['profession']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'nghề nghiệp'];
         }
-        if(!isset($inputs['working_place']) ){
+        if(!isset($inputs['work_place']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'nơi công tác'];
         }
 
