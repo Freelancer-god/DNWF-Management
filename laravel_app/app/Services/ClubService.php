@@ -5,7 +5,9 @@ namespace App\Services;
 
 
 use App\Models\Club;
+use App\Models\File;
 use App\Repositories\Interfaces\ClubRepositoryInterface;
+use App\Repositories\Interfaces\FileRepositoryInterface;
 use App\Services\Base\BaseService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -14,12 +16,15 @@ use Illuminate\Support\Facades\Auth;
 class ClubService extends BaseService
 {
     protected $repo_base;
+    protected $repo_file;
     protected $with;
 
     public function __construct(
-        ClubRepositoryInterface $repo_base
+        ClubRepositoryInterface $repo_base,
+        FileRepositoryInterface $repo_file
     ) {
         $this->repo_base                = $repo_base;
+        $this->repo_file                = $repo_file;
         $this->with                     = [];
     }
 
@@ -56,6 +61,13 @@ class ClubService extends BaseService
         $data->update([
             "reference" => $reference
         ]);
+
+        $data = $this->updateMedia($data, $inputs['media_id']);
+        if($data['is_failed']){
+            return $data;
+        }
+        $data = $data['data'];
+
         $data = $this->repo_base->findById($data->id);
 
 
@@ -81,6 +93,13 @@ class ClubService extends BaseService
         }
 
         $data = $this->repo_base->update($id, $input_dat);
+
+        $data = $this->updateMedia($data, $inputs['media_id']);
+        if($data['is_failed']){
+            return $data;
+        }
+        $data = $data['data'];
+
         $data = $this->repo_base->findById($data->id);
         return [
             'code' => '200',
@@ -155,5 +174,35 @@ class ClubService extends BaseService
         }
 
         return $res;
+    }
+
+    public function updateMedia($data, $media_id)
+    {
+        $media = $this->repo_file->findOneBy([
+            'id' => $media_id,
+            'type' => File::TYPE_MEDIA
+        ]);
+        if (!isset($media)) {
+            return [
+                'is_failed' => true,
+                'code' => '008',
+                'message' => 'Hình ảnh'
+            ];
+        }
+        $data_media = [
+            'id' => $media_id,
+            'path' => 'storage/' . $media->file_path
+        ];
+        $data->update([
+            'media' => json_encode($data_media)
+        ]);
+        $media->update([
+            'fileable_id' => $data->id,
+            'fileable_type' => 'members'
+        ]);
+        return [
+            'is_failed' => false,
+            'data' => $data
+        ];
     }
 }

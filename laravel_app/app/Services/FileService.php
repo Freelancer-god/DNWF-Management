@@ -33,7 +33,7 @@ class FileService extends BaseService
 
         $uploadedImages  = [];
         foreach ($images as $image) {
-            $fileModel = $this->createFile($image, $folder);
+            $fileModel = $this->createFile($image, $folder, File::TYPE_MEDIA);
 
             $uploadedImages[] = $fileModel;
         }
@@ -45,14 +45,21 @@ class FileService extends BaseService
 
     public function uploadImage($request)
     {
-        $request->validate([
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'image.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+        }catch (\Exception $e) {
+            return [
+                'code' => '090',
+                'messgae' => 'Không phải file tài liệu'
+            ];
+        }
 
         $image = $request->file('image');
         $folder = $request->get('fileable_type');
 
-        $fileModel = $this->createFile($image, $folder);
+        $fileModel = $this->createFile($image, $folder, File::TYPE_MEDIA);
         return [
             'code' => '200',
             'data' => $this->formatData($fileModel)
@@ -61,14 +68,22 @@ class FileService extends BaseService
 
     public function uploadFile($request)
     {
-        $request->validate([
-            'file' => 'required|mimes:pdf,doc,docx,txt,jpeg,png,jpg|max:10240', // max:10240 means max 10MB
-        ]);
+        try {
+            $request->validate([
+                'file' => 'required|mimes:pdf,doc,docx,txt,jpeg,png,jpg|max:10240', // max:10240 means max 10MB
+            ]);
+        }catch (\Exception $e){
+            return [
+                'code' => '090',
+                'messgae' => 'Không phải file tài liệu'
+            ];
+        }
+
 
         $file = $request->file('file');
         $folder = $request->get('fileable_type');
 
-        $fileModel = $this->createFile($file, $folder);
+        $fileModel = $this->createFile($file, $folder, File::TYPE_FILE);
         return [
             'code' => '200',
             'data' => $this->formatData($fileModel)
@@ -86,7 +101,7 @@ class FileService extends BaseService
 
         $uploadedFiles  = [];
         foreach ($files as $file) {
-           $fileModel = $this->createFile($file, $folder);
+           $fileModel = $this->createFile($file, $folder, File::TYPE_FILE);
 
            $uploadedFiles[] = $fileModel;
         }
@@ -105,7 +120,7 @@ class FileService extends BaseService
     }
 
 
-    public function createFile($image, $folder){
+    public function createFile($image, $folder, $type){
         $imageName = time().'_'.$image->getClientOriginalName();
         $imagePath = $image->storeAs($folder, $imageName, 'public');
         $fileName = time().'.'.$image->extension();
@@ -113,6 +128,7 @@ class FileService extends BaseService
         $fileModel = new File();
         $fileModel->file_name = $fileName;
         $fileModel->file_path = $imagePath;
+        $fileModel->type = $type;
         $fileModel->file_type = $image->extension();
         $fileModel->save();
 

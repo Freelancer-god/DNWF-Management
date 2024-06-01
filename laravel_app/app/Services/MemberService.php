@@ -4,8 +4,10 @@
 namespace App\Services;
 
 
+use App\Models\File;
 use App\Models\Member;
 use App\Models\Organization;
+use App\Repositories\Interfaces\FileRepositoryInterface;
 use App\Repositories\Interfaces\MemberRepositoryInterface;
 use App\Repositories\Interfaces\OrganizationRepositoryInterface;
 use App\Services\Base\BaseService;
@@ -14,14 +16,17 @@ class MemberService extends BaseService
 {
     protected $repo_base;
     protected $repo_organization;
+    protected $repo_file;
     protected $with;
 
     public function __construct(
         MemberRepositoryInterface $repo_base,
-        OrganizationRepositoryInterface $repo_organization
+        OrganizationRepositoryInterface $repo_organization,
+        FileRepositoryInterface $repo_file
     ) {
         $this->repo_base                = $repo_base;
         $this->repo_organization        = $repo_organization;
+        $this->repo_file                = $repo_file;
         $this->with                     = [];
     }
     public function getModelName()
@@ -46,6 +51,7 @@ class MemberService extends BaseService
         if(!isset($input_dat['confirm_status'])) {
             $input_dat['confirm_status'] = Member::NOT_CONFIRM;
         }
+
         $organization = $this->repo_organization->findById($inputs['organization_id']);
         if(!isset($organization)){
             return ['code' => '004', 'message' => 'Tổ chức'];
@@ -62,6 +68,12 @@ class MemberService extends BaseService
         $data->update([
             "reference" => $reference
         ]);
+        $data = $this->updateMedia($data, $inputs['media_id']);
+        if($data['is_failed']){
+            return $data;
+        }
+        $data = $data['data'];
+
         $data = $this->repo_base->findById($data->id);
 
         return [
@@ -90,8 +102,14 @@ class MemberService extends BaseService
             }
         }
         $input_dat['club_id'] = $organization->club_id;
-
         $data = $this->repo_base->update($id, $input_dat);
+
+        $data = $this->updateMedia($data, $inputs['media_id']);
+        if($data['is_failed']){
+            return $data;
+        }
+        $data = $data['data'];
+
         $data = $this->repo_base->findById($data->id);
         return [
             'code' => '200',
@@ -149,7 +167,7 @@ class MemberService extends BaseService
             return ['is_failed' => true, 'code' => '003', 'message' => 'vai trò trong tổ chức'];
         }
 
-        if(!isset($inputs['media']) ){
+        if(!isset($inputs['media_id']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
         }
 
@@ -166,6 +184,39 @@ class MemberService extends BaseService
             $res['club'] = json_decode($data->club, true);
         }
 
+        if(isset($data->media)){
+            $res['media'] = json_decode($data->media, true);
+        }
+
         return $res;
+    }
+
+    public function updateMedia($data, $media_id){
+        $media = $this->repo_file->findOneBy([
+            'id' => $media_id,
+            'type' => File::TYPE_MEDIA
+        ]);
+        if(!isset($media)){
+            return [
+                'is_failed' => true,
+                'code' => '008',
+                'message' => 'Hình ảnh'
+            ];
+        }
+        $data_media = [
+            'id' => $media_id,
+            'path' => 'storage/'.$media->file_path
+        ];
+        $data->update([
+            'media' => json_encode($data_media)
+        ]);
+        $media->update([
+            'fileable_id' => $data->id,
+            'fileable_type' => 'members'
+        ]);
+        return [
+            'is_failed' => false,
+            'data' => $data
+        ];
     }
 }
