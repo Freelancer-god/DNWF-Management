@@ -95,7 +95,7 @@ Route::group(['prefix' => 'v1'], function () {
     });
 
     Route::get('/hello', function () {
-        return response()->json(['message' => 'Hello World 7']);
+        return response()->json(['message' => 'Hello World 8']);
     });
 });
 
