@@ -5,8 +5,10 @@ namespace App\Services;
 
 
 use App\Models\Club;
+use App\Models\File;
 use App\Models\Organization;
 use App\Repositories\Interfaces\ClubRepositoryInterface;
+use App\Repositories\Interfaces\FileRepositoryInterface;
 use App\Repositories\Interfaces\OrganizationRepositoryInterface;
 use App\Services\Base\BaseService;
 use Carbon\Carbon;
@@ -16,15 +18,18 @@ class OrganizationService extends BaseService
 {
     protected $repo_base;
     protected $repo_club;
+    protected $repo_file;
     protected $with;
 
     public function __construct(
         OrganizationRepositoryInterface $repo_base,
-        ClubRepositoryInterface $repo_club
+        ClubRepositoryInterface $repo_club,
+        FileRepositoryInterface $repo_file
     )
     {
         $this->repo_base = $repo_base;
         $this->repo_club = $repo_club;
+        $this->repo_file = $repo_file;
         $this->with = [];
     }
 
@@ -69,6 +74,13 @@ class OrganizationService extends BaseService
         $data->update([
             "reference" => $reference
         ]);
+
+        $data = $this->updateMedia($data, $inputs['media_id']);
+        if($data['is_failed']){
+            return $data;
+        }
+        $data = $data['data'];
+
         $data = $this->repo_base->findById($data->id);
 
         return [
@@ -102,6 +114,13 @@ class OrganizationService extends BaseService
         }
 
         $data = $this->repo_base->update($id, $input_dat);
+
+        $data = $this->updateMedia($data, $inputs['media_id']);
+        if($data['is_failed']){
+            return $data;
+        }
+        $data = $data['data'];
+
         $data = $this->repo_base->findById($data->id);
         return [
             'code' => '200',
@@ -152,7 +171,7 @@ class OrganizationService extends BaseService
         if(!isset($inputs['phone_zalo']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'số điện thoại zalo'];
         }
-        if(!isset($inputs['media']) ){
+        if(!isset($inputs['media_id']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
         }
         if(!isset($inputs['subject_type']) ){
@@ -178,7 +197,41 @@ class OrganizationService extends BaseService
         if(isset($data->club)){
             $res['club'] = json_decode($data->club, true);
         }
+        $res['organization'] = null;
+        if(isset($data->organization)){
+            $res['organization'] = json_decode($data->organization, true);
+        }
 
         return $res;
+    }
+
+    public function updateMedia($data, $media_id)
+    {
+        $media = $this->repo_file->findOneBy([
+            'id' => $media_id,
+            'type' => File::TYPE_MEDIA
+        ]);
+        if (!isset($media)) {
+            return [
+                'is_failed' => true,
+                'code' => '008',
+                'message' => 'Hình ảnh'
+            ];
+        }
+        $data_media = [
+            'id' => $media_id,
+            'path' => 'storage/' . $media->file_path
+        ];
+        $data->update([
+            'media' => json_encode($data_media)
+        ]);
+        $media->update([
+            'fileable_id' => $data->id,
+            'fileable_type' => 'members'
+        ]);
+        return [
+            'is_failed' => false,
+            'data' => $data
+        ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Passenger;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Relation::morphMap([
-            'passengers' => Passenger::class,
+            'employees' => Employee::class,
         ]);
     }
 }

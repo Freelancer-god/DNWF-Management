@@ -73,4 +73,8 @@ class Club extends Model
     public function organizations(){
         return $this->hasMany(Organization::class, 'club_id');
     }
+
+    public function members(){
+        return $this->hasMany(Member::class, 'club_id');
+    }
 }
