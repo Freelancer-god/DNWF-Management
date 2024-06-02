@@ -31,6 +31,6 @@ return [
     '404' => 'Not found',
     '405' => 'Phương thức không hợp lệ',
     '403' => 'Truy cập không được phép %s',
-    '500' => 'Server error %s',
+    '500' => 'Server error',
     '999' => 'Lỗi không xác định %s',
 ];
