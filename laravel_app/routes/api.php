@@ -88,6 +88,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/care/findById/{id}', [SponsorCareApiController::class, 'findById']);
             Route::delete('/care/destroy/{id}', [SponsorCareApiController::class, 'destroy']);
             Route::get('/care/findBySponsor/{id}', [SponsorCareApiController::class, 'getCareBySponsorId']);
+            Route::put('/care/updateConfirmStatus/{id}', [SponsorCareApiController::class, 'updateConfirmStatus']);
             Route::get('/contract/findAll', [SponsorContractApiController::class, 'findAll']);
             Route::post('/contract/store', [SponsorContractApiController::class, 'store']);
             Route::put('/contract/update/{id}', [SponsorContractApiController::class, 'update']);

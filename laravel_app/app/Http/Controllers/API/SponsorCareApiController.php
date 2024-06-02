@@ -28,4 +28,13 @@ class SponsorCareApiController extends BaseApiController
         return $this->sendResponse($resp['data'], '');
     }
 
+    public function updateConfirmStatus($id, Request $request){
+        $inputs = $request->all();
+        $resp = $this->service_base->updateConfirmStatus($id, $inputs);
+        if($resp['code'] !== '200'){
+            return $this->sendError($resp['message'], $resp['code']);
+        }
+        return $this->sendResponse($resp['data'], 'Update success');
+    }
+
 }

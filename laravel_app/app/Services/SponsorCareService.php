@@ -73,6 +73,27 @@ class SponsorCareService extends BaseService
         ];
     }
 
+    public function updateConfirmStatus($id, $inputs){
+        if(!isset($inputs['status'])){
+            return ['is_failed' => true, 'code' => '003', 'message' =>'trạng thái chăm sóc'];
+        }
+
+        $data = $this->repo_base->findById($id);
+        if (!isset($data)) {
+            return ['code' => '004', 'message' => $this->getModelName()];
+        }
+
+        $data->update([
+            'status' => $inputs['status'],
+        ]);
+
+        $data = $this->repo_base->findById($id);
+        return [
+            'code' => '200',
+            'data' => $this->formatData($data)
+        ];
+    }
+
     public function getCareBySponsorId($id) {
         $contracts = $this->repo_base->findWhereBy(['sponsor_id'=>$id]);
         if (!$contracts) {
