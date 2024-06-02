@@ -109,6 +109,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/logout', [EmployeeApiController::class, 'logout']);
     });
     Route::get('/hello', function () {
-        return response()->json(['message' => 'Hello World 6']);
+        return response()->json(['message' => 'Hello World 8']);
     });
 });
