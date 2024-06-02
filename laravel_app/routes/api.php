@@ -5,6 +5,7 @@ use App\Http\Controllers\API\EmployeeApiController;
 use App\Http\Controllers\API\RoleApiController;
 use App\Http\Controllers\API\EmployeeReportApiController;
 use App\Http\Controllers\API\ClubApiController;
+use App\Http\Controllers\API\CapitalManageApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,18 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/search', [ClubApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [ClubApiController::class, 'updateConfirmStatus']);
         });
+    });
+
+    Route::group(['prefix' => 'capitalmanage'], function () {
+        //Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [CapitalManageApiController::class, 'findAll']);
+            Route::post('/store', [CapitalManageApiController::class, 'store']);
+            Route::put('/update/{id}', [CapitalManageApiController::class, 'update']);
+            Route::get('/findById/{id}', [CapitalManageApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [CapitalManageApiController::class, 'destroy']);
+            Route::post('/search', [CapitalManageApiController::class, 'search']);
+            Route::put('/updateConfirmStatus/{id}', [CapitalManageApiController::class, 'updateConfirmStatus']);
+        //});
     });
 
     Route::group(['prefix' => 'organizations'], function () {

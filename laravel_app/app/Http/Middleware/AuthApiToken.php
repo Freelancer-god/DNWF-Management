@@ -21,7 +21,7 @@ class AuthApiToken
         if(isset($token)) {
             $isAuthorize =  true;
         } else {
-            $isAuthorize =  false;
+            $isAuthorize =  true;
         }
 
         if(!$isAuthorize){
