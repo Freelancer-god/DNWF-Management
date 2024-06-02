@@ -76,11 +76,15 @@ class SponsorService extends BaseService
         // Kiểm tra loại nhà tài trợ
         if (!isset($inputs['sponsor_type']) || empty($inputs['sponsor_type'])) {
             $errors[] = 'Loại nhà tài trợ không được để trống';
+        } elseif (!in_array($inputs['sponsor_type'], ['individual', 'organization'])) {
+            $errors[] = 'Loại nhà tài trợ không hợp lệ';
         }
 
         // Kiểm tra phương thức tài trợ
         if (!isset($inputs['method']) || empty($inputs['method'])) {
             $errors[] = 'Phương thức tài trợ không được để trống';
+        } elseif (!in_array($inputs['method'], ['money', 'in_kind'])) {
+            $errors[] = 'Phương thức tài trợ không hợp lệ';
         }
 
         // Kiểm tra tên nhà tài trợ

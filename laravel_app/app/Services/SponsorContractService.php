@@ -73,6 +73,19 @@ class SponsorContractService extends BaseService
         ];
     }
 
+    public function getContractsBySponsorId($id) {
+        $contracts = $this->repo_base->findWhereBy(['sponsor_id'=>$id]);
+        if (!$contracts) {
+            return ['code' => '404', 'message' => 'Không tìm thấy hợp đồng'];
+        }
+        return [
+            'code' => '200',
+            'data' => $contracts->map(function($contract) {
+                return $this->formatData($contract);
+            })
+        ];
+    }
+
     public function checkInputs($inputs, $id)
     {
         $errors = [];
@@ -92,8 +105,6 @@ class SponsorContractService extends BaseService
         // Kiểm tra mã nhà tài trợ
         if (!isset($inputs['sponsor_id']) || empty($inputs['sponsor_id'])) {
             $errors[] = 'Mã nhà tài trợ không được để trống';
-        }elseif (!Sponsor::idExists($id)) {
-            $errors[] = 'Mã nhà tài trợ không hợp lệ';
         }
     
         // Kiểm tra phân loại

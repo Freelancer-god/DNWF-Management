@@ -24,9 +24,9 @@ class SponsorCare extends Model
     protected $casts = [
         'id' => 'integer',
         'job_type' => 'string',
-        'job_content' => 'text',
+        'job_content' => 'string',
         'executor' => 'string',
-        'notes' => 'text',
+        'notes' => 'string',
         'status' => 'string',
         'sponsor_id' => 'integer',
     ];

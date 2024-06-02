@@ -73,6 +73,19 @@ class SponsorCareService extends BaseService
         ];
     }
 
+    public function getCareBySponsorId($id) {
+        $contracts = $this->repo_base->findWhereBy(['sponsor_id'=>$id]);
+        if (!$contracts) {
+            return ['code' => '404', 'message' => 'Không tìm thấy hợp đồng'];
+        }
+        return [
+            'code' => '200',
+            'data' => $contracts->map(function($contract) {
+                return $this->formatData($contract);
+            })
+        ];
+    }
+
     public function checkInputs($inputs, $id)
     {
         $errors = [];
