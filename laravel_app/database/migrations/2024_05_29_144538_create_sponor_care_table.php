@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('job_content');
             $table->string('executor');
             $table->text('notes')->nullable();
-            $table->enum('status', ['not_cared', 'cared']);
+            $table->integer('status')->default(0);
             $table->unsignedBigInteger('sponsor_id'); // Mã nhà tài trợ
             $table->timestamps();
 

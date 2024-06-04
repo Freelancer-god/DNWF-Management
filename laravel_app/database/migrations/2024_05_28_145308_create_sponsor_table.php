@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sponsor', function (Blueprint $table) {
             $table->id();
-            $table->enum('sponsor_type', ['individual', 'organization']); // Only allow values 'individual' or 'organization' for sponsor type
-            $table->enum('method', ['money', 'in_kind'])->nullable(); // Only allow values 'money' or 'in_kind' for method
+            $table->integer('sponsor_type')->default(0); // Only allow values 'individual' or 'organization' for sponsor type
+            $table->integer('method')->nullable()->default(0); // Only allow values 'money' or 'in_kind' for method
             $table->string('name')->nullable();
             $table->string('field_of_activity', 50);
             $table->string('representative');

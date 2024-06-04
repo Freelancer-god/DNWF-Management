@@ -27,7 +27,7 @@ class SponsorContract extends Model
         'signing_date'            => 'date',
         'contract_number'         => 'string',
         'sponsor_id'              => 'integer',
-        'classification'          => 'string', // enum stored as a string
+        'classification'          => 'integer', // enum stored as a string
         'details'                 => 'string',
         'value'                   => 'decimal:2',
         'sponsorship_duration'    => 'string',

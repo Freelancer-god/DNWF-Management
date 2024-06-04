@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('signing_date');
             $table->string('contract_number'); 
             $table->unsignedBigInteger('sponsor_id'); 
-            $table->enum('classification', ['cash', 'goods']); 
+            $table->integer('classification')->default(0); 
             $table->text('details');
             $table->decimal('value', 15, 2); 
             $table->string('sponsorship_duration'); 

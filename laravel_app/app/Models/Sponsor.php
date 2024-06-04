@@ -33,8 +33,8 @@ class Sponsor extends Model
 
     protected $casts = [
         'id'                              => 'integer',
-        'sponsor_type'                    => 'string', // enum is stored as a string
-        'method'                          => 'string', // enum is stored as a string
+        'sponsor_type'                    => 'integer', // enum is stored as a string
+        'method'                          => 'integer', // enum is stored as a string
         'name'                            => 'string',
         'field_of_activity'               => 'string',
         'representative'                  => 'string',
@@ -57,16 +57,6 @@ class Sponsor extends Model
         ]
     ];
 
-    //status
-    const STATUS_DISABLED = 0;
-    const STATUS_ENABLE = 1;
-
-    //confirm_status
-    const NOT_CONFIRM = 0;
-    const IS_CONFIRM = 1;
-
-    //prefix reference
-    const PREFIX = 'CH';
 
     public function searchText($term)
     {

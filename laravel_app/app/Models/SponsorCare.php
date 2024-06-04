@@ -27,7 +27,7 @@ class SponsorCare extends Model
         'job_content' => 'string',
         'executor' => 'string',
         'notes' => 'string',
-        'status' => 'string',
+        'status' => 'integer',
         'sponsor_id' => 'integer',
     ];
 
@@ -37,15 +37,12 @@ class SponsorCare extends Model
             'sponsor_care.job_content' => 10,
             'sponsor_care.executor' => 10,
             'sponsor_care.notes' => 5,
-            // You can add more columns for searching if needed
         ],
         'joins' => [
-            // If you need to search by sponsor's name
             'sponsor' => ['sponsor_care.sponsor_id', 'sponsor.id'],
         ],
     ];
 
-    // Define the relationship to the Sponsor model
     public function sponsor()
     {
         return $this->belongsTo(Sponsor::class);
