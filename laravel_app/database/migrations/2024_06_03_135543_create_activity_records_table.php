@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->date('start_date')->nullable();
-            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('result')->nullable();
             $table->text('media')->nullable();
             $table->integer('object_id')->nullable();
