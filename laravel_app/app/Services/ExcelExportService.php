@@ -8,7 +8,6 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Style\Borders;
 
 class ExcelExportService
 {
@@ -34,7 +33,6 @@ class ExcelExportService
                 );
             }
         }
-
         $highestRow = count($data) + 1;
         $highestColumn = $this->getColumnLetter(count($columns));
         $cellRange = 'A1:' . $highestColumn . $highestRow;

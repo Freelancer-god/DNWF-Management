@@ -29,7 +29,6 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/search', [EmployeeApiController::class, 'search']);
             Route::post('/dict/getDictByIds', [EmployeeApiController::class, 'getDictByIds']);
             Route::post('/dict/getDictByColumns', [EmployeeApiController::class, 'getDictByColumns']);
-            Route::post('/exportExcel', [EmployeeReportApiController::class, 'exportExcel']);
         });
     });
     // Vai tro
@@ -111,4 +110,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/hello', function () {
         return response()->json(['message' => 'Hello World 8']);
     });
+
+    Route::get('/export-member-activity', [\App\Http\Controllers\API\MemberActivityApiController::class, 'exportMemberActivityPdf']);
 });
