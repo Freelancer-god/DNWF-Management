@@ -41,7 +41,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/store', [RoleApiController::class, 'store']);
             Route::put('/update/{id}', [RoleApiController::class, 'update']);
             Route::get('/findById/{id}', [RoleApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [RoleApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [RoleApiController::class, 'destroy']);
             Route::post('/search', [RoleApiController::class, 'search']);
             Route::post('/dict/getDictByIds', [RoleApiController::class, 'getDictByIds']);
             Route::post('/dict/getDictByColumns', [RoleApiController::class, 'getDictByColumns']);
@@ -55,7 +55,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/store', [ClubApiController::class, 'store']);
             Route::put('/update/{id}', [ClubApiController::class, 'update']);
             Route::get('/findById/{id}', [ClubApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [ClubApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [ClubApiController::class, 'destroy']);
             Route::post('/search', [ClubApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [ClubApiController::class, 'updateConfirmStatus']);
             Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\ClubApiController::class, 'getActivityRecord']);
@@ -70,7 +70,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/store', [\App\Http\Controllers\API\OrganizationApiController::class, 'store']);
             Route::put('/update/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'update']);
             Route::get('/findById/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'destroy']);
             Route::post('/search', [\App\Http\Controllers\API\OrganizationApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'updateConfirmStatus']);
             Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'getActivityRecord']);
@@ -83,20 +83,20 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/store', [SponsorApiController::class, 'store']);
             Route::put('/update/{id}', [SponsorApiController::class, 'update']);
             Route::get('/findById/{id}', [SponsorApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [SponsorApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [SponsorApiController::class, 'destroy']);
             Route::post('/search', [SponsorApiController::class, 'search']);
             Route::get('/care/findAll', [SponsorCareApiController::class, 'findAll']);
             Route::post('/care/store', [SponsorCareApiController::class, 'store']);
             Route::put('/care/update/{id}', [SponsorCareApiController::class, 'update']);
             Route::get('/care/findById/{id}', [SponsorCareApiController::class, 'findById']);
-            Route::delete('/care/destroy/{id}', [SponsorCareApiController::class, 'destroy']);
+            Route::delete('/care/delete/{id}', [SponsorCareApiController::class, 'destroy']);
             Route::get('/care/findBySponsor/{id}', [SponsorCareApiController::class, 'getCareBySponsorId']);
             Route::put('/care/updateConfirmStatus/{id}', [SponsorCareApiController::class, 'updateConfirmStatus']);
             Route::get('/contract/findAll', [SponsorContractApiController::class, 'findAll']);
             Route::post('/contract/store', [SponsorContractApiController::class, 'store']);
             Route::put('/contract/update/{id}', [SponsorContractApiController::class, 'update']);
             Route::get('/contract/findById/{id}', [SponsorContractApiController::class, 'findById']);
-            Route::delete('/contract/destroy/{id}', [SponsorContractApiController::class, 'destroy']);
+            Route::delete('/contract/delete/{id}', [SponsorContractApiController::class, 'destroy']);
             Route::get('/contract/findBySponsor/{id}', [SponsorContractApiController::class, 'getContractsBySponsorId']);
 
         });
@@ -111,7 +111,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/store', [\App\Http\Controllers\API\MemberApiController::class, 'store']);
             Route::put('/update/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'update']);
             Route::get('/findById/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'destroy']);
             Route::post('/search', [\App\Http\Controllers\API\MemberApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'updateConfirmStatus']);
             Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'getActivityRecord']);
@@ -127,7 +127,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/store', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'store']);
             Route::put('/update/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'update']);
             Route::get('/findById/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'destroy']);
             Route::post('/search', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'updateConfirmStatus']);
         });
