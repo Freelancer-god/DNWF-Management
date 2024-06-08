@@ -29,7 +29,7 @@ class ActivityRecord extends Model
         'id' => 'integer',
         'name' => 'string',
         'description' => 'string',
-        'start_date' => 'datetimg',
+        'start_date' => 'datetime',
         'end_date' => 'datetime',
         'result' => 'string',
         'media' => 'string',
@@ -45,5 +45,15 @@ class ActivityRecord extends Model
         ]
     ];
 
+    public function club(){
+        return $this->belongsTo(Club::class, 'object_id')->where('object_type', 'clubs');
+    }
 
+    public function organization(){
+        return $this->belongsTo(Organization::class, 'object_id')->where('object_type', 'organizations');
+    }
+
+    public function member(){
+        return $this->belongsTo(Member::class, 'object_id')->where('object_type', 'members');
+    }
 }

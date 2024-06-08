@@ -7,25 +7,31 @@ namespace App\Services;
 use App\Models\File;
 use App\Models\Member;
 use App\Models\Organization;
+use App\Repositories\Interfaces\ActivityRecordRepositoryInterface;
 use App\Repositories\Interfaces\FileRepositoryInterface;
 use App\Repositories\Interfaces\MemberRepositoryInterface;
 use App\Repositories\Interfaces\OrganizationRepositoryInterface;
 use App\Services\Base\BaseService;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class MemberService extends BaseService
 {
     protected $repo_base;
     protected $repo_organization;
     protected $repo_file;
-    protected $with;
+    protected $repo_activity_record;
+    public $with;
 
     public function __construct(
         MemberRepositoryInterface $repo_base,
         OrganizationRepositoryInterface $repo_organization,
+        ActivityRecordRepositoryInterface $repo_activity_record,
         FileRepositoryInterface $repo_file
     ) {
         $this->repo_base                = $repo_base;
         $this->repo_organization        = $repo_organization;
+        $this->repo_activity_record     = $repo_activity_record;
         $this->repo_file                = $repo_file;
         $this->with                     = [];
     }
@@ -117,6 +123,31 @@ class MemberService extends BaseService
         ];
     }
 
+    public function updateConfirmStatus($id, $inputs){
+        if(!isset($inputs['confirm_status'])){
+            return ['is_failed' => true, 'code' => '003', 'message' =>'trạng thái phê duyệt'];
+        }
+
+        $data = $this->repo_base->findById($id);
+        if (!isset($data)) {
+            return ['code' => '004', 'message' => $this->getModelName()];
+        }
+        $user = Auth::user();
+
+        $data->update([
+            'confirm_status' => $inputs['confirm_status'],
+            'confirm_user_id' => $user->id,
+            'confirm_user_name' => $user->name,
+            'confirm_date' => Carbon::now()->toDateTimeString()
+        ]);
+
+        $data = $this->repo_base->findById($id);
+        return [
+            'code' => '200',
+            'data' => $this->formatData($data)
+        ];
+    }
+
     public function checkInputs($inputs, $id)
     {
         if(!isset($inputs['full_name'])){
@@ -184,8 +215,14 @@ class MemberService extends BaseService
             $res['club'] = json_decode($data->club, true);
         }
 
+        $res['media'] = [];
         if(isset($data->media)){
             $res['media'] = json_decode($data->media, true);
+        }
+
+        $res['activity_records']= [];
+        if(isset($data->activity_records)){
+            $res['activity_records'] = json_decode($data->activity_records, true);
         }
 
         return $res;
@@ -218,5 +255,36 @@ class MemberService extends BaseService
             'is_failed' => false,
             'data' => $data
         ];
+    }
+
+    public function getActivityRecord($id){
+        $activity_records = $this->repo_activity_record->findWhereBy([
+            'object_type' => $this->getTableName(),
+            'object_id' => $id
+        ]);
+
+        return [
+            'code' => '200',
+            'data' => $this->formatSelectDataActivityRecord($activity_records)
+        ];
+    }
+
+    public function formatSelectDataActivityRecord($datas) {
+        $res = [];
+        foreach($datas as $data) {
+            array_push($res, $this->formatDataActivityRecord($data));
+        }
+        return $res;
+    }
+
+    public function formatDataActivityRecord($data){
+        $res = json_decode($data, true);
+        if(isset($res['media'])){
+            $res['media'] = json_decode($res['media'], true);
+        } else {
+            $res['media'] = [];
+        }
+
+        return $res;
     }
 }

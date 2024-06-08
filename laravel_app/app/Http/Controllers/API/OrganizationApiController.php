@@ -24,4 +24,12 @@ class OrganizationApiController extends BaseApiController
         }
         return $this->sendResponse($resp['data'], 'Update success');
     }
+
+    public function getActivityRecord($id){
+        $resp = $this->service_base->getActivityRecord($id);
+        if($resp['code'] !== '200'){
+            return $this->sendError($resp['message'], $resp['code']);
+        }
+        return $this->sendResponse($resp['data'], 'Get activity record success');
+    }
 }

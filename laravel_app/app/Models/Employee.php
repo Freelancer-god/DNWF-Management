@@ -65,7 +65,7 @@ class Employee extends Authenticatable implements LaratrustUser
     ];
 
     protected $hidden = [
-        'deleted_at'
+        'deleted_at', 'password'
     ];
 
     protected $searchable = [

@@ -43,11 +43,11 @@ class ActivityRecordService extends BaseService
 
         $data = $this->repo_base->create($input_dat);
 
-        $data = $this->updateMedia($data, $inputs['media_id']);
-        if($data['is_failed']){
-            return $data;
-        }
-        $data = $data['data'];
+//        $data = $this->updateMedia($data, $inputs['media_id']);
+//        if($data['is_failed']){
+//            return $data;
+//        }
+//        $data = $data['data'];
 
         $data = $this->repo_base->findById($data->id);
 
@@ -99,8 +99,15 @@ class ActivityRecordService extends BaseService
         if(!isset($inputs['result'])){
             return ['is_failed' => true, 'code' => '003', 'message' =>'kết quả'];
         }
-        if(!isset($inputs['media'])){
+        if(!isset($inputs['media_id'])){
             return ['is_failed' => true, 'code' => '003', 'message' =>'hình ảnh'];
+        }
+
+        if(!isset($inputs['object_id'])){
+            return ['is_failed' => true, 'code' => '003', 'message' =>'object_id'];
+        }
+        if(!isset($inputs['object_type'])){
+            return ['is_failed' => true, 'code' => '003', 'message' =>'loại'];
         }
 
         return [

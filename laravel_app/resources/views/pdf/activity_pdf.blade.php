@@ -11,21 +11,21 @@
 </head>
 <body>
 <h1>Quá Trình Sinh Hoạt Hội Viên</h1>
-<p><strong>Họ và tên:</strong> {{ $member['name'] }}</p>
-<p><strong>Mã hội viên:</strong> {{ $member['membership_id'] }}</p>
+<p><strong>Họ và tên:</strong> {{ $member['full_name'] }}</p>
+<p><strong>Mã hội viên:</strong> {{ $member['reference'] }}</p>
 <h2>Hoạt Động</h2>
 <table>
     <thead>
     <tr>
-        <th>Ngày</th>
-        <th>Hoạt Động</th>
+        <th>Tên</th>
+        <th>Kết quả</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($member['activities'] as $activity)
+    @foreach($member['activity_records'] as $activity)
         <tr>
-            <td>{{ $activity['date'] }}</td>
-            <td>{{ $activity['activity'] }}</td>
+            <td>{{ $activity['name'] }}</td>
+            <td>{{ $activity['result'] }}</td>
         </tr>
     @endforeach
     </tbody>
