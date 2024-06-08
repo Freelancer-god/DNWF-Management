@@ -57,6 +57,20 @@ return [
             2 => 'Lân sư rồng',
             3 => 'Lân sư rồng và wushu',
         ]
+        ],
+    'sponsor'=>[
+        'types' => [
+            0 => 'individual',
+            1 => 'organization',
+        ],
+        'method' => [
+            0 => 'money',
+            1 => 'in_kind',
+        ],
+        'care_status'=> [
+            0 => 'cared',
+            1 => 'not_cared',
+        ]
     ]
 
 ];

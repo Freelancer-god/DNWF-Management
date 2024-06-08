@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\API\SponsorApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EmployeeApiController;
 use App\Http\Controllers\API\RoleApiController;
 use App\Http\Controllers\API\EmployeeReportApiController;
 use App\Http\Controllers\API\ClubApiController;
+use App\Http\Controllers\API\SponsorContractApiController;
+use App\Http\Controllers\API\SponsorCareApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +73,32 @@ Route::group(['prefix' => 'v1'], function () {
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'updateConfirmStatus']);
         });
     });
+    Route::group(['prefix' => 'sponsors'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [SponsorApiController::class, 'findAll']);
+            Route::post('/store', [SponsorApiController::class, 'store']);
+            Route::put('/update/{id}', [SponsorApiController::class, 'update']);
+            Route::get('/findById/{id}', [SponsorApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [SponsorApiController::class, 'destroy']);
+            Route::post('/search', [SponsorApiController::class, 'search']);
+            Route::get('/care/findAll', [SponsorCareApiController::class, 'findAll']);
+            Route::post('/care/store', [SponsorCareApiController::class, 'store']);
+            Route::put('/care/update/{id}', [SponsorCareApiController::class, 'update']);
+            Route::get('/care/findById/{id}', [SponsorCareApiController::class, 'findById']);
+            Route::delete('/care/destroy/{id}', [SponsorCareApiController::class, 'destroy']);
+            Route::get('/care/findBySponsor/{id}', [SponsorCareApiController::class, 'getCareBySponsorId']);
+            Route::put('/care/updateConfirmStatus/{id}', [SponsorCareApiController::class, 'updateConfirmStatus']);
+            Route::get('/contract/findAll', [SponsorContractApiController::class, 'findAll']);
+            Route::post('/contract/store', [SponsorContractApiController::class, 'store']);
+            Route::put('/contract/update/{id}', [SponsorContractApiController::class, 'update']);
+            Route::get('/contract/findById/{id}', [SponsorContractApiController::class, 'findById']);
+            Route::delete('/contract/destroy/{id}', [SponsorContractApiController::class, 'destroy']);
+            Route::get('/contract/findBySponsor/{id}', [SponsorContractApiController::class, 'getContractsBySponsorId']);
+
+        });
+    });
+
+
 
     //Hoi vien
     Route::group(['prefix' => 'members'], function () {
