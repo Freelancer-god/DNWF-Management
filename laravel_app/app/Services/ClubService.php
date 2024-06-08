@@ -94,11 +94,13 @@ class ClubService extends BaseService
 
         $data = $this->repo_base->update($id, $input_dat);
 
-        $data = $this->updateMedia($data, $inputs['media_id']);
-        if($data['is_failed']){
-            return $data;
+        if(isset($inputs['media_id'])){
+            $data = $this->updateMedia($data, $inputs['media_id']);
+            if($data['is_failed']){
+                return $data;
+            }
+            $data = $data['data'];
         }
-        $data = $data['data'];
 
         $data = $this->repo_base->findById($data->id);
         return [
