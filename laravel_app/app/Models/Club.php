@@ -77,4 +77,8 @@ class Club extends Model
     public function members(){
         return $this->hasMany(Member::class, 'club_id');
     }
+
+    public function activity_records(){
+        return $this->hasMany(ActivityRecord::class, 'object_id')->where('object_type', 'clubs');
+    }
 }

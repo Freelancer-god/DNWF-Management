@@ -99,4 +99,8 @@ class Member extends Model
     public function organization(){
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public function activity_records(){
+        return $this->hasMany(ActivityRecord::class, 'object_id')->where('object_type', 'members');
+    }
 }

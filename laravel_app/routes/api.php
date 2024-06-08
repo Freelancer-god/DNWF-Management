@@ -26,9 +26,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::middleware(['auth:api'])->group(function (){
             Route::get('/findAll', [EmployeeApiController::class, 'findAll']);
             Route::post('/store', [EmployeeApiController::class, 'store']);
-            Route::post('/update/{id}', [EmployeeApiController::class, 'update']);
+            Route::put('/update/{id}', [EmployeeApiController::class, 'update']);
             Route::get('/findById/{id}', [EmployeeApiController::class, 'findById']);
-            Route::delete('/destroy/{id}', [EmployeeApiController::class, 'destroy']);
+            Route::delete('/delete/{id}', [EmployeeApiController::class, 'destroy']);
             Route::post('/search', [EmployeeApiController::class, 'search']);
             Route::post('/dict/getDictByIds', [EmployeeApiController::class, 'getDictByIds']);
             Route::post('/dict/getDictByColumns', [EmployeeApiController::class, 'getDictByColumns']);
@@ -58,6 +58,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('/destroy/{id}', [ClubApiController::class, 'destroy']);
             Route::post('/search', [ClubApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [ClubApiController::class, 'updateConfirmStatus']);
+            Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\ClubApiController::class, 'getActivityRecord']);
+            Route::get('/export-activity/{id}', [\App\Http\Controllers\API\ClubActivityApiController::class, 'exportActivityPdf']);
         });
     });
 
@@ -71,6 +73,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('/destroy/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'destroy']);
             Route::post('/search', [\App\Http\Controllers\API\OrganizationApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'updateConfirmStatus']);
+            Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\OrganizationApiController::class, 'getActivityRecord']);
+            Route::get('/export-member-activity/{id}', [\App\Http\Controllers\API\OrganizationActivityApiController::class, 'exportActivityPdf']);
         });
     });
     Route::group(['prefix' => 'sponsors'], function () {
@@ -110,6 +114,22 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('/destroy/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'destroy']);
             Route::post('/search', [\App\Http\Controllers\API\MemberApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'updateConfirmStatus']);
+            Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\MemberApiController::class, 'getActivityRecord']);
+            Route::get('/export-activity/{id}', [\App\Http\Controllers\API\MemberActivityApiController::class, 'exportActivityPdf']);
+
+        });
+    });
+
+    //Qua trinh sinh hoat
+    Route::group(['prefix' => 'activity_records'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'findAll']);
+            Route::post('/store', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'store']);
+            Route::put('/update/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'update']);
+            Route::get('/findById/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'destroy']);
+            Route::post('/search', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'search']);
+            Route::put('/updateConfirmStatus/{id}', [\App\Http\Controllers\API\ActivityRecordApiController::class, 'updateConfirmStatus']);
         });
     });
 
@@ -140,5 +160,4 @@ Route::group(['prefix' => 'v1'], function () {
         return response()->json(['message' => 'Hello World 8']);
     });
 
-    Route::get('/export-member-activity', [\App\Http\Controllers\API\MemberActivityApiController::class, 'exportMemberActivityPdf']);
 });

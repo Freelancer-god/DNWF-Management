@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Club;
 use App\Models\File;
 use App\Models\Organization;
+use App\Repositories\Interfaces\ActivityRecordRepositoryInterface;
 use App\Repositories\Interfaces\ClubRepositoryInterface;
 use App\Repositories\Interfaces\FileRepositoryInterface;
 use App\Repositories\Interfaces\OrganizationRepositoryInterface;
@@ -19,17 +20,20 @@ class OrganizationService extends BaseService
     protected $repo_base;
     protected $repo_club;
     protected $repo_file;
+    protected $repo_activity_record;
     protected $with;
 
     public function __construct(
         OrganizationRepositoryInterface $repo_base,
         ClubRepositoryInterface $repo_club,
-        FileRepositoryInterface $repo_file
+        FileRepositoryInterface $repo_file,
+        ActivityRecordRepositoryInterface $repo_activity_record
     )
     {
         $this->repo_base = $repo_base;
         $this->repo_club = $repo_club;
         $this->repo_file = $repo_file;
+        $this->repo_activity_record = $repo_activity_record;
         $this->with = [];
     }
 
@@ -202,6 +206,11 @@ class OrganizationService extends BaseService
             $res['organization'] = json_decode($data->organization, true);
         }
 
+        $res['activity_records']= [];
+        if(isset($data->activity_records)){
+            $res['activity_records'] = json_decode($data->activity_records, true);
+        }
+
         return $res;
     }
 
@@ -233,5 +242,36 @@ class OrganizationService extends BaseService
             'is_failed' => false,
             'data' => $data
         ];
+    }
+
+    public function getActivityRecord($id){
+        $activity_records = $this->repo_activity_record->findWhereBy([
+            'object_type' => $this->getTableName(),
+            'object_id' => $id
+        ]);
+
+        return [
+            'code' => '200',
+            'data' => $this->formatSelectDataActivityRecord($activity_records)
+        ];
+    }
+
+    public function formatSelectDataActivityRecord($datas) {
+        $res = [];
+        foreach($datas as $data) {
+            array_push($res, $this->formatDataActivityRecord($data));
+        }
+        return $res;
+    }
+
+    public function formatDataActivityRecord($data){
+        $res = json_decode($data, true);
+        if(isset($res['media'])){
+            $res['media'] = json_decode($res['media'], true);
+        } else {
+            $res['media'] = [];
+        }
+
+        return $res;
     }
 }

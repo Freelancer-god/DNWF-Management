@@ -85,4 +85,8 @@ class Organization extends Model
     public function members(){
         return $this->hasMany(Member::class, 'organization_id');
     }
+
+    public function activity_records(){
+        return $this->hasMany(ActivityRecord::class, 'object_id')->where('object_type', 'organizations');
+    }
 }
