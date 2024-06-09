@@ -72,7 +72,7 @@ class OfficialDocumentService extends BaseService
         }
 
         // Thêm ID của file vào trường attachment
-        $input_data = $validate['request'];
+        $input_data = $validate['inputs'];
         $input_data['attachment'] = $fileId;
         $data = $this->repo_base->create($input_data);
 
@@ -104,42 +104,42 @@ class OfficialDocumentService extends BaseService
             'data' => $data
         ];
     }
-    public function checkInputs($request,$id) {
+    public function checkInputs($inputs,$id) {
 
         $errors = [];
 
         // Kiểm tra và ánh xạ dữ liệu vào các trường tương ứng của bảng
-        if (!isset($request['document_number']) || empty($request['document_number'])) {
+        if (!isset($inputs['document_number']) || empty($inputs['document_number'])) {
             $errors[] = 'Số hiệu văn bản là bắt buộc';
         }
     
-        if (!isset($request['issue_date']) || empty($request['issue_date'])) {
+        if (!isset($inputs['issue_date']) || empty($inputs['issue_date'])) {
             $errors[] = 'Ngày ban hành là bắt buộc';
         } else {
-            $request['issue_date'] = date('Y-m-d', strtotime($request['issue_date']));
+            $inputs['issue_date'] = date('Y-m-d', strtotime($inputs['issue_date']));
         }
     
-        if (!isset($request['issued_by']) || empty($request['issued_by'])) {
+        if (!isset($inputs['issued_by']) || empty($inputs['issued_by'])) {
             $errors[] = 'Nơi ban hành là bắt buộc';
         }
     
-        if (!isset($request['document_type'])) {
+        if (!isset($inputs['document_type'])) {
             $errors[] = 'Loại văn bản là bắt buộc';
         }
     
-        if (!isset($request['status'])) {
+        if (!isset($inputs['status'])) {
             $errors[] = 'Trạng thái là bắt buộc';
         }
 
-        if (!isset($request['summary']) || empty($request['summary'])) {
+        if (!isset($inputs['summary']) || empty($inputs['summary'])) {
             $errors[] = 'Trích yếu văn bản là bắt buộc';
         }
     
-        if (!isset($request['signed_by']) || empty($request['signed_by'])) {
+        if (!isset($inputs['signed_by']) || empty($inputs['signed_by'])) {
             $errors[] = 'Người ký là bắt buộc';
         }
     
-        if (!isset($request['recipient']) || empty($request['recipient'])) {
+        if (!isset($inputs['recipient']) || empty($inputs['recipient'])) {
             $errors[] = 'Nơi nhận là bắt buộc';
         }
     
@@ -150,6 +150,6 @@ class OfficialDocumentService extends BaseService
     
     
         // Nếu không có lỗi, trả về dữ liệu đầu vào cho việc xử lý tiếp theo
-        return ['is_failed' => false, 'request' => $request];
+        return ['is_failed' => false, 'inputs' => $inputs];
     }
 }
