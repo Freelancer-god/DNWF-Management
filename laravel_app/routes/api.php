@@ -149,6 +149,16 @@ Route::group(['prefix' => 'v1'], function () {
         });
     });
 
+    Route::group(['prefix' => 'media'], function () {
+        Route::middleware(['auth:api'])->group(function (){
+            Route::get('/findAll', [\App\Http\Controllers\API\MediaApiController::class, 'findAll']);
+            Route::post('/store', [\App\Http\Controllers\API\MediaApiController::class, 'create']);
+            Route::put('/update/{id}', [\App\Http\Controllers\API\MediaApiController::class, 'updateMedia']);
+            Route::get('/findById/{id}', [\App\Http\Controllers\API\MediaApiController::class, 'findById']);
+            Route::delete('/delete/{id}', [\App\Http\Controllers\API\MediaApiController::class, 'destroy']);
+            Route::get('/findAll', [\App\Http\Controllers\API\MediaApiController::class, 'findAll']);
+        });
+    });
 
     //auth
     Route::post('/login', [EmployeeApiController::class, 'loginWithPassword']);
