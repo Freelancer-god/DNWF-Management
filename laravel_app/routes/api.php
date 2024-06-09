@@ -149,6 +149,17 @@ Route::group(['prefix' => 'v1'], function () {
         });
     });
 
+    //Van thu
+    Route::group(['prefix' => 'document'], function () {
+        Route::middleware(['auth:api'])->group(function () {
+            Route::get('/findAll', [\App\Http\Controllers\API\OfficialDocumentApiController::class, 'findAll']);
+            Route::post('/store', [\App\Http\Controllers\API\OfficialDocumentApiController::class, 'create']);
+            Route::put('/update/{id}', [\App\Http\Controllers\API\OfficialDocumentApiController::class, 'update']);
+            Route::get('/findById/{id}', [\App\Http\Controllers\API\OfficialDocumentApiController::class, 'findById']);
+            Route::delete('/destroy/{id}', [\App\Http\Controllers\API\OfficialDocumentApiController::class, 'destroy']);
+            Route::post('/search', [\App\Http\Controllers\API\OfficialDocumentApiController::class, 'search']);
+        });
+    });
 
     //auth
     Route::post('/login', [EmployeeApiController::class, 'loginWithPassword']);

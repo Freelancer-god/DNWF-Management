@@ -71,6 +71,13 @@ return [
             0 => 'cared',
             1 => 'not_cared',
         ]
+        ],
+    'document'=>[
+        'status' => [
+            0 => 'incoming',
+            1 => 'outgoing',
+        ],
     ]
+
 
 ];
