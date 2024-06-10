@@ -74,11 +74,11 @@ class MemberService extends BaseService
         $data->update([
             "reference" => $reference
         ]);
-        $data = $this->updateMedia($data, $inputs['media_id']);
-        if($data['is_failed']){
-            return $data;
-        }
-        $data = $data['data'];
+//        $data = $this->updateMedia($data, $inputs['media_id']);
+//        if($data['is_failed']){
+//            return $data;
+//        }
+//        $data = $data['data'];
 
         $data = $this->repo_base->findById($data->id);
 
@@ -110,11 +110,11 @@ class MemberService extends BaseService
         $input_dat['club_id'] = $organization->club_id;
         $data = $this->repo_base->update($id, $input_dat);
 
-        $data = $this->updateMedia($data, $inputs['media_id']);
-        if($data['is_failed']){
-            return $data;
-        }
-        $data = $data['data'];
+//        $data = $this->updateMedia($data, $inputs['media_id']);
+//        if($data['is_failed']){
+//            return $data;
+//        }
+//        $data = $data['data'];
 
         $data = $this->repo_base->findById($data->id);
         return [
