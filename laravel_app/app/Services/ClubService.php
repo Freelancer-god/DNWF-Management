@@ -161,9 +161,9 @@ class ClubService extends BaseService
         if(!isset($inputs['phone_zalo']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'số điện thoại zalo'];
         }
-        if(!isset($inputs['media']) ){
-            return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
-        }
+//        if(!isset($inputs['media_id']) ){
+//            return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
+//        }
 
         return [
             'is_failed' => false,

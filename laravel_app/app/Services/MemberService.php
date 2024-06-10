@@ -198,9 +198,9 @@ class MemberService extends BaseService
             return ['is_failed' => true, 'code' => '003', 'message' => 'vai trò trong tổ chức'];
         }
 
-        if(!isset($inputs['media_id']) ){
-            return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
-        }
+//        if(!isset($inputs['media_id']) ){
+//            return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
+//        }
 
         return [
             'is_failed' => false,

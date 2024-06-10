@@ -175,9 +175,9 @@ class OrganizationService extends BaseService
         if(!isset($inputs['phone_zalo']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'số điện thoại zalo'];
         }
-        if(!isset($inputs['media_id']) ){
-            return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
-        }
+//        if(!isset($inputs['media_id']) ){
+//            return ['is_failed' => true, 'code' => '003', 'message' => 'hình ảnh'];
+//        }
         if(!isset($inputs['subject_type']) ){
             return ['is_failed' => true, 'code' => '003', 'message' => 'bộ môn'];
         }
