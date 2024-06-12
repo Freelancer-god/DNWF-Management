@@ -67,6 +67,6 @@ class EmployeeApiController extends BaseApiController
 
     public function getPermission() {
         $resp = $this->service_base->getPermission();
-        return $this->sendResponse($resp['data'], 'Change password success');
+        return $this->sendResponse($resp['data'], 'get permission success');
     }
 }

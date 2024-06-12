@@ -122,6 +122,7 @@ class EmployeeService extends BaseService
 
     public function getPermission() {
         $employ = auth()->user();
+        $employ->roles();
         return [
             'code' => '200',
             'data' => count($employ->roles) > 0 ? $employ->roles[0]->permissions : null

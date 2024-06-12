@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Laratrust\Contracts\LaratrustUser;
-use Laratrust\Traits\HasRolesAndPermissions;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use Laratrust\Contracts\LaratrustUser;
+use Laratrust\Traits\HasRolesAndPermissions;
 
 class Employee extends Authenticatable implements LaratrustUser
 {

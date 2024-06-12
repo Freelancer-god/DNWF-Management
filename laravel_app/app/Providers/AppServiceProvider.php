@@ -22,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Relation::morphMap([
-            'employees' => Employee::class,
-        ]);
+//        Relation::morphMap([
+//            'employees' => Employee::class,
+//        ]);
     }
 }

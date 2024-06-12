@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/search', [EmployeeApiController::class, 'search']);
             Route::post('/dict/getDictByIds', [EmployeeApiController::class, 'getDictByIds']);
             Route::post('/dict/getDictByColumns', [EmployeeApiController::class, 'getDictByColumns']);
+            Route::get('/getPermission', [EmployeeApiController::class, 'getPermission']);
         });
     });
     // Vai tro
