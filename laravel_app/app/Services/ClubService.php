@@ -12,6 +12,7 @@ use App\Repositories\Interfaces\FileRepositoryInterface;
 use App\Services\Base\BaseService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClubService extends BaseService
 {
@@ -183,6 +184,11 @@ class ClubService extends BaseService
             $res['activity_records'] = json_decode($data->activity_records, true);
         }
 
+        $res['affiliated_unit_name']= [];
+        if(isset($data->affiliated_unit)){
+            $res['affiliated_unit_name'] = config('enums.clubs.affiliated_unit')[$data->affiliated_unit];
+        }
+
         return $res;
     }
 
@@ -245,5 +251,62 @@ class ClubService extends BaseService
         }
 
         return $res;
+    }
+
+    public function reportMembers($inputs){
+        if(!isset($inputs['created_at']) || count($inputs['created_at']) < 1 || !is_array($inputs['created_at'])){
+            $inputs['created_at'] = [
+                Carbon::parse('1970-01-01')->toDateTimeString(),
+                Carbon::now()->toDateTimeString()
+            ];
+        }
+        $data_report_members = DB::select(
+            "SELECT
+                    c.affiliated_unit,
+                    SUM(CASE WHEN o.subject_type = 1 AND m.gender = 1 THEN 1 ELSE 0 END) AS `member_male_lan_su_rong`,
+                    SUM(CASE WHEN o.subject_type = 1 AND m.gender = 2 THEN 1 ELSE 0 END) AS `member_female_lan_su_rong`,
+                    SUM(CASE WHEN o.subject_type = 2 AND m.gender = 1 THEN 1 ELSE 0 END) AS `member_male_wushu`,
+                    SUM(CASE WHEN o.subject_type = 2 AND m.gender = 2 THEN 1 ELSE 0 END) AS `member_female_wushu`,
+                    SUM(CASE WHEN o.subject_type = 3 AND m.gender = 1 THEN 1 ELSE 0 END) AS `member_male_lan_su_rong_va_wushu`,
+                    SUM(CASE WHEN o.subject_type = 3 AND m.gender = 2 THEN 1 ELSE 0 END) AS `member_female_lan_su_rong_va_wushu`
+                FROM
+                    clubs c
+                LEFT JOIN
+                    organizations o ON c.id = o.club_id
+                LEFT JOIN
+                    members m ON c.id = m.club_id
+                WHERE m.created_at BETWEEN '{$inputs['created_at'][0]}' AND '{$inputs['created_at'][1]}'
+                GROUP BY
+                    c.affiliated_unit
+                ORDER BY
+                    c.affiliated_unit;"
+        );
+
+        $data_report_organization = DB::select("
+        SELECT
+            c.affiliated_unit,
+            SUM(CASE WHEN o.subject_type = 1 THEN 1 ELSE 0 END) AS `organization_wushu`,
+            SUM(CASE WHEN o.subject_type = 2 THEN 1 ELSE 0 END) AS `organization_lan_su_rong`,
+            SUM(CASE WHEN o.subject_type = 3 THEN 1 ELSE 0 END) AS `organization_lan_su_rong_va_wushu`
+        FROM
+            clubs c
+        LEFT JOIN
+            organizations o ON c.id = o.club_id
+        WHERE o.created_at BETWEEN '{$inputs['created_at'][0]}' AND '{$inputs['created_at'][1]}'
+        GROUP BY
+            c.affiliated_unit
+        ORDER BY
+            c.affiliated_unit;
+        ");
+
+        $result = [
+            'report_organizations' => json_decode(json_encode($data_report_organization), true),
+            'report_members' => json_decode(json_encode($data_report_members), true)
+        ];
+
+        return [
+          'code' => '200',
+          'data' =>  $result
+        ];
     }
 }

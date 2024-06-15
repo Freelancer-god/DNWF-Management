@@ -37,4 +37,13 @@ class ClubApiController extends BaseApiController
         }
         return $this->sendResponse($resp['data'], 'Get activity record success');
     }
+
+    public function reportMembers(Request $request){
+        $inputs = $request->all();
+        $resp = $this->service_base->reportMembers($inputs);
+        if($resp['code'] !== '200'){
+            return $this->sendError($resp['message'], $resp['code']);
+        }
+        return $this->sendResponse($resp['data'], 'Get activity record success');
+    }
 }

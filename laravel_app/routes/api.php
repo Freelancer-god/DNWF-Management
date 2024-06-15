@@ -4,7 +4,6 @@ use App\Http\Controllers\API\SponsorApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\EmployeeApiController;
 use App\Http\Controllers\API\RoleApiController;
-use App\Http\Controllers\API\EmployeeReportApiController;
 use App\Http\Controllers\API\ClubApiController;
 use App\Http\Controllers\API\SponsorContractApiController;
 use App\Http\Controllers\API\SponsorCareApiController;
@@ -59,7 +58,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::delete('/delete/{id}', [ClubApiController::class, 'destroy']);
             Route::post('/search', [ClubApiController::class, 'search']);
             Route::put('/updateConfirmStatus/{id}', [ClubApiController::class, 'updateConfirmStatus']);
-            Route::get('/getActivityRecord/{id}', [\App\Http\Controllers\API\ClubApiController::class, 'getActivityRecord']);
+            Route::get('/getActivityRecord/{id}', [ClubApiController::class, 'getActivityRecord']);
+            Route::post('/reportMembers', [ClubApiController::class, 'reportMembers']);
             Route::get('/export-activity/{id}', [\App\Http\Controllers\API\ClubActivityApiController::class, 'exportActivityPdf']);
         });
     });
@@ -78,6 +78,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/export-member-activity/{id}', [\App\Http\Controllers\API\OrganizationActivityApiController::class, 'exportActivityPdf']);
         });
     });
+
     Route::group(['prefix' => 'sponsors'], function () {
         Route::middleware(['auth:api'])->group(function (){
             Route::get('/findAll', [SponsorApiController::class, 'findAll']);

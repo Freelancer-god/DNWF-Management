@@ -28,6 +28,7 @@ class Club extends Model
         'confirm_date',
         'confirm_user_id',
         'confirm_user_name',
+        'affiliated_unit'
     ];
 
     protected $casts = [
@@ -44,7 +45,8 @@ class Club extends Model
         'confirm_status'  => 'integer',
         'confirm_date'  => 'datetime',
         'confirm_user_id'       => 'integer',
-        'confirm_user_name'     => 'string'
+        'confirm_user_name'     => 'string',
+        'affiliated_unit' => 'integer'
     ];
 
     protected $searchable = [

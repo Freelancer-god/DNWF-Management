@@ -57,7 +57,23 @@ return [
             2 => 'Lân sư rồng',
             3 => 'Lân sư rồng và wushu',
         ]
-        ],
+    ],
+    'clubs' => [
+        'affiliated_unit' => [
+            1 => 'TP Biên Hoà',
+            2 => 'TP Long Khánh',
+            3 => 'Huyện Cẩm Mỹ',
+            4 => 'Huyện Định Quán',
+            5 => 'Huyện Long Thành',
+            6 => 'Huyện Nhơn Trạch',
+            7 => 'Huyện Tân Phú',
+            8 => 'Huyện Thông Nhất',
+            9 => 'Huyện Trảng Bom',
+            10 => 'Huyện Vĩnh Cửu',
+            11 => 'Huyện Xuân Lộc',
+            12 => 'Khác',
+        ]
+    ],
     'sponsor'=>[
         'types' => [
             0 => 'individual',
