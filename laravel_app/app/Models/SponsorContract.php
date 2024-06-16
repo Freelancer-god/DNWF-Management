@@ -20,6 +20,8 @@ class SponsorContract extends Model
         'details',
         'value',
         'sponsorship_duration',
+        'introducer',
+        'unit'
     ];
 
     protected $casts = [
@@ -31,6 +33,8 @@ class SponsorContract extends Model
         'details'                 => 'string',
         'value'                   => 'decimal:2',
         'sponsorship_duration'    => 'string',
+        'introducer'              => 'string',
+        'unit'                    => 'string',
     ];
 
     protected $searchable = [

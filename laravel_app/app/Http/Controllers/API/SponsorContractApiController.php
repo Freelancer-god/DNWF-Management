@@ -27,5 +27,24 @@ class SponsorContractApiController extends BaseApiController
         }
         return $this->sendResponse($resp['data'], '');
     }
+    public function groupByUnit()
+    {
+        $resp = $this->service_base->groupByUnit();
+
+        if($resp['code'] !== '200'){
+            return $this->sendError($resp['message'], $resp['code']);
+        }
+        return $this->sendResponse($resp['data'], '');
+    }
+
+    public function getByUnit($unit)
+    {
+        $resp = $this->service_base->getSponsorStatusByUnit($unit);
+
+        if($resp['code'] !== '200'){
+            return $this->sendError($resp['message'], $resp['code']);
+        }
+        return $this->sendResponse($resp['data'], '');
+    }
 
 }

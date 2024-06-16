@@ -4,12 +4,12 @@
 namespace App\Services;
 
 
-use App\Models\Sponsor;
+use App\Models\SponsorContract;
 use App\Repositories\Interfaces\SponsorContractRepositoryInterface;
 use App\Services\Base\BaseService;
-use Carbon\Carbon;
+use App\Models\Sponsor;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SponsorContractService extends BaseService
 {
@@ -86,6 +86,73 @@ class SponsorContractService extends BaseService
         ];
     }
 
+    public function groupByUnit()
+    {
+        // Query to group sponsor contracts by unit and categorize by sponsor type
+        $results = SponsorContract::select('unit', 'sponsor.sponsor_type as sponsor_type', \DB::raw('count(sponsor_contract.id) as total_contracts'), \DB::raw('sum(sponsor_contract.value) as total_value'))
+            ->join('sponsor', 'sponsor_contract.sponsor_id', '=', 'sponsor.id')
+            ->groupBy('unit', 'sponsor_type')
+            ->get();
+
+        // Transform the results into the desired format
+        $groupedData = [];
+        foreach ($results as $result) {
+            $unit = $result->unit;
+            $type = $result->sponsor_type == 'individual' ? 'individual' : 'organization';
+
+            if (!isset($groupedData[$unit])) {
+                $groupedData[$unit] = [
+                    'individual' => [
+                        'total_contracts' => 0,
+                        'total_value' => 0,
+                    ],
+                    'organization' => [
+                        'total_contracts' => 0,
+                        'total_value' => 0,
+                    ],
+                ];
+            }
+
+            $groupedData[$unit][$type]['total_contracts'] += $result->total_contracts;
+            $groupedData[$unit][$type]['total_value'] += $result->total_value;
+        }
+
+        return  [
+            'code' => '200',
+            'data' => $groupedData
+        ];
+    }
+
+    public function getSponsorStatusByUnit($unit)
+    {
+        $sponsorContracts = SponsorContract::where('unit', $unit)
+            ->with('sponsor')
+            ->get();
+
+        $groupedData = [];
+
+        foreach ($sponsorContracts as $contract) {
+            $key = $contract->introducer . '_' . $contract->sponsor_id . '_' . $contract->unit;
+
+            if (!isset($groupedData[$key])) {
+                $groupedData[$key] = [
+                    'introducer' => $contract->introducer,
+                    'sponsor_name' => $contract->sponsor->name,
+                    'sponsor_type' => $contract->sponsor->sponsor_type,
+                    'total_value' => 0,
+                ];
+            }
+
+            $groupedData[$key]['total_value'] += $contract->value;
+        }
+
+        // Transform associative array into indexed array for consistent JSON response
+        return  [
+            'code' => '200',
+            'data' => array_values($groupedData)
+        ]; 
+    }
+
     public function checkInputs($inputs, $id)
     {
         $errors = [];
@@ -126,10 +193,20 @@ class SponsorContractService extends BaseService
         if (!isset($inputs['sponsorship_duration']) || empty($inputs['sponsorship_duration'])) {
             $errors[] = 'Thời hạn tài trợ không được để trống';
         }
+
+        // Kiểm tra người giới thiệu
+        if (!isset($inputs['introducer'])) {
+            $errors[] = 'Người giới thiệu không được để trống';
+        }
+
+        // Kiểm tra đơn vị tài trợ
+        if (!isset($inputs['unit'])) {
+            $errors[] = 'Đơn vị tài trợ không được để trống';
+        }
     
         // Nếu có lỗi, trả về thông báo lỗi
         if (!empty($errors)) {
-            return ['is_failed' => true, 'code' => '400', 'message' => implode(', ', $errors)];
+            return ['is_failed' => true, 'code' => '003', 'message' => implode(', ', $errors)];
         }
     
         // Nếu không có lỗi, trả về dữ liệu đầu vào

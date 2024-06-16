@@ -99,6 +99,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/contract/findById/{id}', [SponsorContractApiController::class, 'findById']);
             Route::delete('/contract/delete/{id}', [SponsorContractApiController::class, 'destroy']);
             Route::get('/contract/findBySponsor/{id}', [SponsorContractApiController::class, 'getContractsBySponsorId']);
+            Route::get('/contract/groupByUnit', [SponsorContractApiController::class, 'groupByUnit']);
+            Route::get('/contract/status/{unit}', [SponsorContractApiController::class, 'getByUnit']);
 
         });
     });
